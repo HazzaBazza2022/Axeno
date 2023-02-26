@@ -22,7 +22,7 @@
                 </GridView>
             </ListView.View>
             <ListView.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Width="200">
                     <MenuItem Header="Manage Device" />
                     <MenuItem Header="System">
                         <MenuItem Header="Shutdown" />
