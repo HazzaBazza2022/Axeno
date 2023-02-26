@@ -1,0 +1,40 @@
+﻿<Window x:Class="Axeno.MainWindow"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        WindowStartupLocation="CenterScreen"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 Background="Transparent"
+        xmlns:local="clr-namespace:Axeno" xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Title="Axeno" Height="550" Width="920">
+    <Window.Resources>
+        <Storyboard x:Key="ExitAnimation">
+            <DoubleAnimation Storyboard.Target="{Binding ElementName='window'}"
+                             Storyboard.TargetProperty="(Window.Opacity)"
+                             Duration="0:0:1" From="1" To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
+    </i:Interaction.Behaviors>
+    <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
+        <Grid  MouseDown="Grid_MouseDown">
+            <Grid>
+                <Border  CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,503" />
+                <Ellipse Fill="Red" Margin="889,6,4,518" MouseDown="Ellipse_MouseDown"/>
+                <TextBlock Text="Axeno" FontWeight="Bold" FontSize="20" Margin="423,0,423,514"/>
+                <Ellipse Fill="Orange" Margin="870,6,23,518" MouseDown="Ellipse_MouseDown_2"/>
+                <Frame Name="frmMain" Margin="0,40,0,10" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

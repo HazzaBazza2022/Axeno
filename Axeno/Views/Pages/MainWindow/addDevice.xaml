@@ -1,0 +1,30 @@
+﻿<Page x:Class="Axeno.Views.Pages.MainWindow.addDevice"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      Background="White"
+      xmlns:local="clr-namespace:Axeno.Views.Pages.MainWindow"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="488" d:DesignWidth="908"
+      Title="addDevice">
+
+    <Grid>
+        <TextBlock Text="Create new Client" FontSize="40" FontWeight="Thin" Margin="302,25,302,400" />
+        <TextBox BorderBrush="DodgerBlue" FontSize="15" Name="tbgroup" mah:TextBoxHelper.Watermark="Group Name" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="302,93,302,353" />
+        <TextBox BorderBrush="DodgerBlue" FontSize="15" x:Name="tbip" mah:TextBoxHelper.Watermark="IP Address" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="302,148,302,298" />
+        <CheckBox Content="Install Client" FontSize="15" Margin="398,317,398,146" />
+        <Button x:Name="btnbuild" Content="Build Client" Style="{StaticResource roundbtn}" FontSize="15" Margin="465,390,253,55" Click="btnbuild_Click" />
+        <CheckBox Content="Elevate Priviledges" FontSize="15" Margin="398,347,343,121" />
+        <TextBox BorderBrush="DodgerBlue" FontSize="15" x:Name="tboutput" mah:TextBoxHelper.Watermark="Output Filename" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="302,258,302,188" />
+        <TextBox BorderBrush="DodgerBlue" FontSize="15" x:Name="tpport" mah:TextBoxHelper.Watermark="Port" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="302,202,302,244" />
+        <Button BorderBrush="DodgerBlue" Style="{StaticResource MahApps.Styles.Button.Circle}" Content="?" Margin="611,157,273,307" />
+        <Button BorderBrush="DodgerBlue" Style="{StaticResource MahApps.Styles.Button.Circle}" Content="?" Margin="611,211,273,253" />
+        <Button BorderBrush="DodgerBlue" Style="{StaticResource MahApps.Styles.Button.Circle}" Content="?" Margin="611,102,273,362" />
+        <Button BorderBrush="DodgerBlue" Style="{StaticResource MahApps.Styles.Button.Circle}" Content="?" Margin="611,267,273,197" />
+        <Button x:Name="btnreturn" Content="Return Home" Style="{StaticResource roundbtn}" FontSize="15" Margin="265,390,453,55" Click="btnreturn_Click" />
+
+
+    </Grid>
+</Page>

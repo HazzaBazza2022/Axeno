@@ -1,0 +1,39 @@
+﻿<Page x:Class="Axeno.Views.Pages.MainWindow.ClientPanel"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Axeno.Views.Pages.MainWindow"
+      mc:Ignorable="d"
+      d:DesignHeight="488" d:DesignWidth="908"
+      Title="ClientPanel">
+    <Grid>
+        <ListView Width="908"  Grid.Column="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Online" Width="80" DisplayMemberBinding="{Binding isOnline}" />
+                    <GridViewColumn Header="Group" Width="110" DisplayMemberBinding="{Binding groupName}" />
+                    <GridViewColumn Header="Username@PC" Width="190" DisplayMemberBinding="{Binding clientName}" />
+                    <GridViewColumn Header="Application Level" Width="130" DisplayMemberBinding="{Binding appLevel}" />
+                    <GridViewColumn Header="Last Seen" Width="190" DisplayMemberBinding="{Binding lastSeen}" />
+                    <GridViewColumn Header="Ping" Width="70" DisplayMemberBinding="{Binding ping}" />
+                    <GridViewColumn Header="Install Date" Width="130" DisplayMemberBinding="{Binding installDate}" />
+                    <GridViewColumn Header="Version" Width="116" DisplayMemberBinding="{Binding version}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Manage Device" />
+                    <MenuItem Header="System">
+                        <MenuItem Header="Shutdown" />
+                        <MenuItem Header="Restart" />
+                        <MenuItem Header="Signout" />
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Port Manager" Click="MenuItem_Click"/>
+                    <MenuItem Header="Create new Client" Click="MenuItem_Click_1"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+    </Grid>
+</Page>

@@ -1,0 +1,42 @@
+﻿<Window x:Class="Axeno.Licensing.LicensingWindow"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        WindowStartupLocation="CenterScreen"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 Background="Transparent"
+        xmlns:local="clr-namespace:Axeno" xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Title="Axeno" Height="440" Width="360">
+    <Window.Resources>
+        <Storyboard x:Key="ExitAnimation">
+            <DoubleAnimation Storyboard.Target="{Binding ElementName='window'}"
+                             Storyboard.TargetProperty="(Window.Opacity)"
+                             Duration="0:0:1" From="1" To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
+    </i:Interaction.Behaviors>
+    <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="6" Background="GhostWhite" MouseDown="Border_MouseDown">
+        <Grid MouseDown="Grid_MouseDown">
+            <Grid>
+                <Ellipse Fill="Red" MouseDown="Ellipse_MouseDown" Margin="323,4,6,405"/>
+                <Ellipse Fill="Orange"  MouseDown="Ellipse_MouseDown_2" Margin="299,4,30,405" />
+                <TextBlock Text="Welcome to Axeno!" FontSize="30" FontWeight="Bold" Margin="36,39,30,348"/>
+                <TextBox FontSize="13" Name="tblicence" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Licence Key" Margin="36,299,40,94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <Button FontSize="15" Name="btnvalidate"  Style="{StaticResource roundbtn}" Content="Validate Licence" Margin="154,347,40,43" Click="Button_Click" />
+                <mah:ProgressRing Name="progressring" Visibility="Hidden" IsActive="True" HorizontalAlignment="Left" Margin="109,347,0,0" VerticalAlignment="Top" Height="38" Width="30" />
+                <TextBlock FontSize="15" Text="Please input your licence key below. You should have recieved it in an email when you originally purchased Axeno. When you press validate, your licence will be bound to this computer, so please ensure this is the computer you would like to use Axeno on. If you would like to change computers in future, please contact Axeno Support." Margin="36,104,40,134" TextWrapping="Wrap"/>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>
