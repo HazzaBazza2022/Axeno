@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using Axeno.Helper;
 
 namespace Axeno.Views.Pages.MainWindow
 {
@@ -29,19 +30,24 @@ namespace Axeno.Views.Pages.MainWindow
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            if(btncreatecert.Content == "Finish")
+            {
+                MainWindowSlides.mainFrame.Navigate(MainWindowSlides.ClientPanel);
+                return;
+            }
             btncreatecert.Content = "Creating...";
             btncreatecert.IsEnabled = false;
             certprog.Visibility = Visibility.Visible;
-            Task.Factory.StartNew(() =>
+            await Task.Factory.StartNew(() =>
             {
                 Settings.ServerCertificate = Helper.CertificateManager.CreateCertificateAuthority("Axeno", 4096);
                 Directory.CreateDirectory("Certificate");
                 File.WriteAllBytes("Certificate/AxenoCert.p12", Settings.ServerCertificate.Export(X509ContentType.Pkcs12));
             });
             certprog.Visibility = Visibility.Hidden;
-            btncreatecert.Content = "Next";
+            btncreatecert.Content = "Finish";
             btncreatecert.IsEnabled = true;
         }
     }

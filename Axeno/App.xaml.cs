@@ -28,8 +28,7 @@ namespace Axeno
 
 
             MainWindowSlides.BuildClientPanel = new addDevice();
-            MainWindowSlides.PortManager = new portManager();
-            MainWindowSlides.NoClients = new NoClients();
+
             auth.init();
             if (File.Exists("licence.axeno"))
             {
