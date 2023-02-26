@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows;
 using Axeno.Views.Pages.MainWindow;
 using Axeno.Helper;
-
 namespace Axeno
 {
     /// <summary>
@@ -30,6 +29,7 @@ namespace Axeno
 
             MainWindowSlides.BuildClientPanel = new addDevice();
             MainWindowSlides.PortManager = new portManager();
+            MainWindowSlides.NoClients = new NoClients();
             auth.init();
             if (File.Exists("licence.axeno"))
             {

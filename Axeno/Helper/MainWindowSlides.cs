@@ -14,5 +14,6 @@ namespace Axeno.Helper
         public static portManager PortManager { get; set; }
         public static addDevice BuildClientPanel { get; set; }
         public static ClientPanel ClientPanel { get;set;}
+        public static NoClients NoClients { get; set; }
     }
 }

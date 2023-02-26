@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Axeno.Views.Pages.MainWindow;
 using System.Windows.Shapes;
+using System.IO;
 using Axeno.Helper;
 namespace Axeno
 {
@@ -26,11 +27,22 @@ namespace Axeno
             InitializeComponent();
             MainWindowSlides.mainFrame = frmMain;
             frmMain.BeginInit();
-            ClientPanel cli = new ClientPanel();
-            MainWindowSlides.ClientPanel = cli;
-            frmMain.Navigate(cli);
+            Loaded += MainWindow_Loaded;
         }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!File.Exists("Certificate/AxenoCert.p12"))
+            {
+                frmMain.Navigate(MainWindowSlides.NoClients);
+            }
+            else
+            {
+                ClientPanel cli = new ClientPanel();
+                MainWindowSlides.ClientPanel = cli;
+                frmMain.Navigate(cli);
+            }
+        }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
