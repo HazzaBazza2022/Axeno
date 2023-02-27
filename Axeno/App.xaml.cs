@@ -22,6 +22,7 @@ namespace Axeno
 
             MainWindowSlides.BuildClientPanel = new addDevice();
             MainWindowSlides.PortManager = new portManager();
+            Settings.ServerCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2("Certificate/AxenoCert.p12");
 #if DEBUG
             MainWindow mw = new MainWindow();
             MainWindow.Show();

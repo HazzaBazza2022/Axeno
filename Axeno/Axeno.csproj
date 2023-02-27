@@ -82,6 +82,8 @@
     <Compile Include="Licensing\LicensingWindow.xaml.cs">
       <DependentUpon>LicensingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Networking\Connection\Client.cs" />
+    <Compile Include="Networking\Connection\Listener.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\Pages\MainWindow\addDevice.xaml.cs">
       <DependentUpon>addDevice.xaml</DependentUpon>
@@ -164,7 +166,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Networking\" />
     <Folder Include="Views\Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
