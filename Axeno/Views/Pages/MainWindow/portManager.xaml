@@ -1,15 +1,27 @@
-﻿<Page x:Class="Axeno.Views.Pages.MainWindow.portManager"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Axeno.Views.Pages.MainWindow"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Axeno.Views.Pages.MainWindow.portManager"
       Background="White"
       mc:Ignorable="d" 
       d:DesignHeight="488" d:DesignWidth="908"
       Title="portManager">
 
     <Grid>
-        
+
+        <TextBlock Text="Add a Port" FontSize="40" FontWeight="Thin" Margin="302,25,302,400" TextAlignment="Center" />
+        <Button x:Name="btnlisten" Content="Start Listening" Style="{StaticResource roundbtn}" FontSize="15" Margin="465,370,253,75" Click="btnlisten_Click" />
+        <TextBox BorderBrush="DodgerBlue" FontSize="15" x:Name="tpport" mah:TextBoxHelper.Watermark="Port" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="305,123,299,323" />
+        <Button x:Name="btnreturn" Content="Return Home" Style="{StaticResource roundbtn}" FontSize="15" Margin="265,370,453,75" Click="btnreturn_Click" />
+        <ListView BorderBrush="DodgerBlue" BorderThickness="1" Name="lvports" Margin="305,177,299,143" d:ItemsSource="{d:SampleData ItemCount=5}" Width="304">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ports" Width="300" DisplayMemberBinding="{Binding AddPort}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

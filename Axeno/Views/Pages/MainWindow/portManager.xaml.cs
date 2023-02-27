@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Axeno.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace Axeno.Views.Pages.MainWindow
         public portManager()
         {
             InitializeComponent();
+        }
+
+        private void btnlisten_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnreturn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowSlides.mainFrame.Navigate(MainWindowSlides.ClientPanel);
         }
     }
 }

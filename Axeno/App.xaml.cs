@@ -19,26 +19,29 @@ namespace Axeno
     );
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //#if DEBUG
-
-            //            MainWindow mw = new MainWindow();
-            //            MainWindow.Show();
-            //            return;
-            //#endif
-
 
             MainWindowSlides.BuildClientPanel = new addDevice();
+            MainWindowSlides.PortManager = new portManager();
+#if DEBUG
+            MainWindow mw = new MainWindow();
+            MainWindow.Show();
+            return;
+#endif
+
+
+
 
             auth.init();
             if (File.Exists("licence.axeno"))
             {
                 string key = File.ReadAllText("licence.axeno");
                 auth.license(key);
-                if(auth.response.success)
+                if (auth.response.success)
                 {
                     MW.Show();
                     return;
-                }else
+                }
+                else
                 {
                     //File.Delete("licence.axeno");
                     MessageBox.Show("Authentication failed. If you would like to request a Hardware ID reset, please contact Axeno Support.", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
