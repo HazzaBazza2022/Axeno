@@ -77,6 +77,7 @@
     </ApplicationDefinition>
     <Compile Include="Helper\CertificateManager.cs" />
     <Compile Include="Helper\MainWindowSlides.cs" />
+    <Compile Include="Helper\PortManagerListView.cs" />
     <Compile Include="Licensing\KeyAuth.cs" />
     <Compile Include="Licensing\LicensingWindow.xaml.cs">
       <DependentUpon>LicensingWindow.xaml</DependentUpon>

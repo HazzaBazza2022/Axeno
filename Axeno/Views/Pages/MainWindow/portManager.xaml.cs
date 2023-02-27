@@ -35,5 +35,28 @@ namespace Axeno.Views.Pages.MainWindow
         {
             MainWindowSlides.mainFrame.Navigate(MainWindowSlides.ClientPanel);
         }
+
+        private void tbport_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return) {
+                if(string.IsNullOrEmpty(tbport.Text))
+                {
+                    return;
+                }
+                int portnum = Convert.ToInt32(tbport.Text);
+                if (!Enumerable.Range(1, 65535).Contains(portnum))
+                {
+                    MessageBox.Show("Please enter a valid port.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                lvports.Items.Add(new Port { port = tbport.Text });
+                tbport.Text = null;
+            }
+        }
+
+        private void lvremove_Click(object sender, RoutedEventArgs e)
+        {
+            lvports.Items.Remove(lvports.SelectedItem);
+        }
     }
 }

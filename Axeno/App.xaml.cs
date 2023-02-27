@@ -27,10 +27,6 @@ namespace Axeno
             MainWindow.Show();
             return;
 #endif
-
-
-
-
             auth.init();
             if (File.Exists("licence.axeno"))
             {
