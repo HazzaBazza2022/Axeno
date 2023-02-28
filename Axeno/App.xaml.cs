@@ -11,6 +11,7 @@ namespace Axeno
     public partial class App : Application
     {
         public static MainWindow MW = new MainWindow();
+
         public static api auth = new api(
     name: "Axeno",
     ownerid: "SUweiaBFS7",

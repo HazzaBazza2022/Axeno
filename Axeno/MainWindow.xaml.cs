@@ -40,6 +40,7 @@ namespace Axeno
             {
                 ClientPanel cli = new ClientPanel();
                 MainWindowSlides.ClientPanel = cli;
+                MainWindowSlides.lvClients = cli.lvclients;
                 frmMain.Navigate(cli);
             }
         }

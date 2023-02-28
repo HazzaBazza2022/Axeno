@@ -22,9 +22,7 @@ namespace Axeno.Client
                 {
                     if (!ClientSocket.IsConnected)
                     {
-
                         ClientSocket.Connect();
-
                     }
                 }
                 catch { }

@@ -8,8 +8,9 @@ using System.Windows.Controls;
 
 namespace Axeno.Helper
 {
-    internal class MainWindowSlides
+    internal class MainWindowSlides 
     {
+        public static ListView lvClients { get; set; }
         public static Frame mainFrame { get; set; }
         public static portManager PortManager { get; set; }
         public static addDevice BuildClientPanel { get; set; }
