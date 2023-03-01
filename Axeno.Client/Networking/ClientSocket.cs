@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Axeno.Client.Helper;
+using System.Timers;
 
 namespace Axeno.Client.Networking
 {
@@ -27,6 +28,16 @@ namespace Axeno.Client.Networking
         private static long HeaderSize { get; set; }
         private static long Offset { get; set; }
         public static bool IsConnected { get; set; }
+        public static System.Timers.Timer pingTimer = new System.Timers.Timer();
+        public static void CheckClientConnection(object source, ElapsedEventArgs e)
+        {
+            if (!CheckConnection())
+            {
+                IsConnected = false;
+                return;
+            }
+        }
+
         public static void Connect()
         {
             try
@@ -50,7 +61,11 @@ namespace Axeno.Client.Networking
                     Offset = 0;
                     Buffer = new byte[HeaderSize];
                     Send(SendInfo.GetAndSendInformation());
+                    pingTimer.Elapsed += new ElapsedEventHandler(CheckClientConnection);
+                    pingTimer.Interval = 5000;
+                    pingTimer.Enabled = true;
                     SslClient.BeginRead(Buffer, (int)Offset, (int)HeaderSize, ReadServerData, null);
+
                 }
             }
             catch
@@ -173,6 +188,15 @@ namespace Axeno.Client.Networking
                 IsConnected = false;
                 return;
             }
+        }
+        public static bool CheckConnection()
+        {
+            try
+            {
+                return !(Socket.Poll(1, SelectMode.SelectRead) && Socket.Available == 0);
+            }
+            catch (SocketException) { return false; }
+
         }
 
     }

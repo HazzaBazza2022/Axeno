@@ -29,7 +29,7 @@ namespace Axeno.Networking.Connection
         private long HeaderSize { get; set; }
         private long Offset { get; set; }
         private bool ClientBufferRecevied { get; set; }
-        private System.Timers.Timer aTimer = new System.Timers.Timer();
+        private System.Timers.Timer pingTimer = new System.Timers.Timer();
         public Client(Socket socket)
         {
 
@@ -38,10 +38,10 @@ namespace Axeno.Networking.Connection
             IP = Socket.RemoteEndPoint.ToString().Split(':')[0];
             SslClient = new SslStream(new NetworkStream(Socket, true), false);
             SslClient.BeginAuthenticateAsServer(Settings.ServerCertificate, false, SslProtocols.Tls, false, EndAuthenticate, null);
-            
-            aTimer.Elapsed += new ElapsedEventHandler(GetPingCheckConnection);
-            aTimer.Interval = 5000;
-            aTimer.Enabled = true;
+
+            pingTimer.Elapsed += new ElapsedEventHandler(GetPingCheckConnection);
+            pingTimer.Interval = 5000;
+            pingTimer.Enabled = true;
 
         }
         public void GetPingCheckConnection(object source, ElapsedEventArgs e)
@@ -88,7 +88,7 @@ namespace Axeno.Networking.Connection
         }
         public void Disconnected()
         {
-            aTimer.Stop();
+            pingTimer.Stop();
             try
             {
                 ThreadPool.QueueUserWorkItem(delegate
@@ -99,7 +99,7 @@ namespace Axeno.Networking.Connection
                     }));
                 });
                 Socket?.Dispose();
-                aTimer?.Dispose();
+                pingTimer?.Dispose();
                 SslClient?.Dispose();
             }
             catch { }

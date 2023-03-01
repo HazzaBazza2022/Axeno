@@ -17,7 +17,7 @@
                     <GridViewColumn Header="Application Level" Width="130" DisplayMemberBinding="{Binding appLevel}" />
                     <GridViewColumn Header="Operating System" Width="190" DisplayMemberBinding="{Binding operatingSystem}" />
                     <GridViewColumn Header="Ping" Width="70" DisplayMemberBinding="{Binding ping}" />
-                    <GridViewColumn Header="Install Date" Width="130" DisplayMemberBinding="{Binding installDate}" />
+                    <GridViewColumn Header="Install Date" Width="135" DisplayMemberBinding="{Binding installDate}" />
                     <GridViewColumn Header="Version" Width="116" DisplayMemberBinding="{Binding version}" />
                 </GridView>
             </ListView.View>
@@ -28,6 +28,11 @@
                         <MenuItem Header="Shutdown" />
                         <MenuItem Header="Restart" />
                         <MenuItem Header="Signout" />
+                    </MenuItem>
+                    <MenuItem Header="Client">
+                        <MenuItem Header="Reconnect" />
+                        <MenuItem Header="Disconnect" />
+                        <MenuItem Header="Disconnect &amp; Uninstall" />
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="Port Manager" Click="MenuItem_Click"/>

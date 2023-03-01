@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Axeno.Helper;
 
 namespace Axeno.Views.Pages.MainWindow
 {
@@ -45,6 +46,7 @@ namespace Axeno.Views.Pages.MainWindow
                 {
                     t.Abort();
                 }
+                MainWindowSlides.lvClients.Items.Clear();
                 btnlisten.Content = "Start Listening";
                 btnlisten.IsEnabled = true;
 
