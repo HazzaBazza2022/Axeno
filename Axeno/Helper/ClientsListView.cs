@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Axeno.Helper
 {
-    internal class ClientsLV : INotifyPropertyChanged
+    public class ClientsLV : INotifyPropertyChanged
     {
         public Socket Socket { get; set; }
-        public string isOnline { get; set; }
+        public string uid { get; set; }
         public string groupName { get; set; }
         public string clientName { get; set; }
         public string appLevel { get; set; }
-        public string lastSeen { get; set; }
+        public string operatingSystem { get; set; }
         public string _ping;
         public string ping
         {

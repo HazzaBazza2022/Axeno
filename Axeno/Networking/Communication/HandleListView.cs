@@ -17,8 +17,29 @@ namespace Axeno.Networking.Communication
             string permissions = msgpck.ForcePathObject("Applevel").AsString;
             string installdate = msgpck.ForcePathObject("Instdate").AsString;
             string username = msgpck.ForcePathObject("Username").AsString;
-            MainWindowSlides.lvClients.Items.Add(new ClientsLV { groupName = group, appLevel = permissions, installDate = installdate, clientName = username, isOnline = "True", ping = "N/A", Socket = cli.Socket });
+            string os = msgpck.ForcePathObject("Operatingsystem").AsString;
+            string version = msgpck.ForcePathObject("Version").AsString;
+            
+            ClientsLV thisclient = new ClientsLV();
+            thisclient.uid = GetUID();
+            thisclient.version = version;
+            thisclient.groupName = group;
+            thisclient.appLevel = permissions;
+            thisclient.installDate = installdate;
+            thisclient.clientName = username;
+            thisclient.Socket = cli.Socket;
+            thisclient.operatingSystem = os;
+            thisclient.ping = "N/A";
+            MainWindowSlides.lvClients.Items.Add(thisclient);
+            cli.CurrentClient = thisclient;
         }
+        private static Random random = new Random();
 
+        public string GetUID()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }

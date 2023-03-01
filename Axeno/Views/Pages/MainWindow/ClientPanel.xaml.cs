@@ -34,5 +34,10 @@ namespace Axeno.Views.Pages.MainWindow
         {
             MainWindowSlides.mainFrame.Navigate(MainWindowSlides.BuildClientPanel);
         }
+
+        private void lvclients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

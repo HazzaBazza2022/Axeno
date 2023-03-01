@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Helper\SendInfo.cs" />
     <Compile Include="Networking\ClientSocket.cs" />
+    <Compile Include="Networking\Packet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

@@ -25,24 +25,32 @@ namespace Axeno.Networking.Connection
         public SslStream SslClient { get; set; }
         public string IP { get; set; }
         private byte[] ClientBuffer { get; set; }
+        public ClientsLV CurrentClient { get; set; }
         private long HeaderSize { get; set; }
         private long Offset { get; set; }
         private bool ClientBufferRecevied { get; set; }
+        private System.Timers.Timer aTimer = new System.Timers.Timer();
         public Client(Socket socket)
         {
 
             Socket = socket;
+            
             IP = Socket.RemoteEndPoint.ToString().Split(':')[0];
             SslClient = new SslStream(new NetworkStream(Socket, true), false);
             SslClient.BeginAuthenticateAsServer(Settings.ServerCertificate, false, SslProtocols.Tls, false, EndAuthenticate, null);
-            System.Timers.Timer aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(GetPing);
+            
+            aTimer.Elapsed += new ElapsedEventHandler(GetPingCheckConnection);
             aTimer.Interval = 5000;
             aTimer.Enabled = true;
 
         }
-        public void GetPing(object source, ElapsedEventArgs e)
+        public void GetPingCheckConnection(object source, ElapsedEventArgs e)
         {
+            if(!CheckConnection())
+            { 
+                Disconnected();
+                return;
+            }
             long pingTime = 0;
             Ping pingSender = new Ping();
             IPAddress address = IPAddress.Parse(Socket.RemoteEndPoint.ToString().Split(':')[0]);
@@ -56,13 +64,7 @@ namespace Axeno.Networking.Connection
             {
 
                 MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
-                    foreach(ClientsLV cli in lvClients.Items)
-                    {
-                        if(cli.Socket == Socket)
-                        {
-                            cli.ping = pingTime.ToString() + "ms";
-                        }
-                    }
+                    CurrentClient.ping = pingTime.ToString() + "ms";
                 }));
             });
 
@@ -76,6 +78,7 @@ namespace Axeno.Networking.Connection
                 HeaderSize = 4;
                 ClientBuffer = new byte[HeaderSize];
                 SslClient.BeginRead(ClientBuffer, (int)Offset, (int)HeaderSize, ReadClientData, null);
+                
             }
             catch
             {
@@ -85,9 +88,19 @@ namespace Axeno.Networking.Connection
         }
         public void Disconnected()
         {
+            aTimer.Stop();
             try
             {
+                ThreadPool.QueueUserWorkItem(delegate
+                {
+
+                    MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                        lvClients.Items.Remove(CurrentClient);
+                    }));
+                });
                 Socket?.Dispose();
+                aTimer?.Dispose();
+                SslClient?.Dispose();
             }
             catch { }
 
@@ -167,6 +180,16 @@ namespace Axeno.Networking.Connection
                 return;
             }
         }
+        public bool CheckConnection()
+        {
+            try
+            {
+                return !(Socket.Poll(1, SelectMode.SelectRead) && Socket.Available == 0); 
+            }
+            catch (SocketException) { return false; }
+
+        }
+
 
     }
 }

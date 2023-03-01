@@ -8,14 +8,14 @@
       d:DesignHeight="488" d:DesignWidth="908"
       Title="ClientPanel">
     <Grid>
-        <ListView Name="lvclients" Width="908"  Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView Name="lvclients" Width="908"  Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lvclients_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Online" Width="80" DisplayMemberBinding="{Binding isOnline}" />
+                    <GridViewColumn Header="UID" Width="80" DisplayMemberBinding="{Binding uid}" />
                     <GridViewColumn Header="Group" Width="110" DisplayMemberBinding="{Binding groupName}" />
                     <GridViewColumn Header="Username@PC" Width="190" DisplayMemberBinding="{Binding clientName}" />
                     <GridViewColumn Header="Application Level" Width="130" DisplayMemberBinding="{Binding appLevel}" />
-                    <GridViewColumn Header="Last Seen" Width="190" DisplayMemberBinding="{Binding lastSeen}" />
+                    <GridViewColumn Header="Operating System" Width="190" DisplayMemberBinding="{Binding operatingSystem}" />
                     <GridViewColumn Header="Ping" Width="70" DisplayMemberBinding="{Binding ping}" />
                     <GridViewColumn Header="Install Date" Width="130" DisplayMemberBinding="{Binding installDate}" />
                     <GridViewColumn Header="Version" Width="116" DisplayMemberBinding="{Binding version}" />

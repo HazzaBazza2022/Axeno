@@ -14,8 +14,8 @@ namespace Axeno.Networking.Connection
     public class Listener
     {
         private Socket ClientSocket { get; set; }
-
-        public void Connect(object port)
+        private bool Listening = true;
+        public async void Connect(object port)
         {
             try
             {
@@ -27,7 +27,11 @@ namespace Axeno.Networking.Connection
                 };
                 ClientSocket.Bind(ipEndPoint);
                 ClientSocket.Listen(500);
-                ClientSocket.BeginAccept(EndAccept, null);
+                while (Listening)
+                {
+                    await Task.Delay(500);
+                    ClientSocket.BeginAccept(EndAccept, null);
+                }
             }
             catch (Exception ex)
             {
@@ -49,6 +53,7 @@ namespace Axeno.Networking.Connection
         {
             try
             {
+                Listening= false;
                 ClientSocket.Disconnect(true);
             }
             catch

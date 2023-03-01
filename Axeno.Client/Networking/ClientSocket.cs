@@ -65,7 +65,72 @@ namespace Axeno.Client.Networking
         }
         public static void ReadServerData(IAsyncResult ar)
         {
-
+            try
+            {
+                if (!Socket.Connected || !IsConnected)
+                {
+                    IsConnected = false;
+                    return;
+                }
+                int recevied = SslClient.EndRead(ar);
+                if (recevied > 0)
+                {
+                    Offset += recevied;
+                    HeaderSize -= recevied;
+                    if (HeaderSize == 0)
+                    {
+                        HeaderSize = BitConverter.ToInt32(Buffer, 0);
+                        if (HeaderSize > 0)
+                        {
+                            Offset = 0;
+                            Buffer = new byte[HeaderSize];
+                            while (HeaderSize > 0)
+                            {
+                                int rc = SslClient.Read(Buffer, (int)Offset, (int)HeaderSize);
+                                if (rc <= 0)
+                                {
+                                    IsConnected = false;
+                                    return;
+                                }
+                                Offset += rc;
+                                HeaderSize -= rc;
+                                if (HeaderSize < 0)
+                                {
+                                    IsConnected = false;
+                                    return;
+                                }
+                            }
+                            Thread thread = new Thread(new ParameterizedThreadStart(Packet.Read));
+                            thread.Start(Buffer);
+                            Offset = 0;
+                            HeaderSize = 4;
+                            Buffer = new byte[HeaderSize];
+                        }
+                        else
+                        {
+                            HeaderSize = 4;
+                            Buffer = new byte[HeaderSize];
+                            Offset = 0;
+                        }
+                    }
+                    else if (HeaderSize < 0)
+                    {
+                        IsConnected = false;
+                        return;
+                    }
+                    SslClient.BeginRead(Buffer, (int)Offset, (int)HeaderSize, ReadServerData, null);
+                }
+                else
+                {
+                    IsConnected = false;
+                    return;
+                }
+            }
+            catch
+            {
+                IsConnected = false;
+                return;
+            }
         }
 
         public static void Send(byte[] msg)
@@ -81,9 +146,8 @@ namespace Axeno.Client.Networking
                 Socket.Poll(-1, SelectMode.SelectWrite);
                 SslClient.Write(buffersize, 0, buffersize.Length);
 
-                if (msg.Length > 1000000) //1mb
+                if (msg.Length > 1000000) 
                 {
-                    Debug.WriteLine("send chunks");
                     using (MemoryStream memoryStream = new MemoryStream(msg))
                     {
                         int read = 0;
