@@ -47,7 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\SendInfo.cs" />
+    <Compile Include="MessagePack\BytesTools.cs" />
+    <Compile Include="MessagePack\MsgPack.cs" />
+    <Compile Include="MessagePack\MsgPackType.cs" />
+    <Compile Include="MessagePack\ReadTools.cs" />
+    <Compile Include="MessagePack\WriteTools.cs" />
+    <Compile Include="MessagePack\Zip.cs" />
     <Compile Include="Networking\ClientSocket.cs" />
+    <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Packet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,11 +82,5 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\MessagePackLib\MessagePackLib.csproj">
-      <Project>{099ADB31-D626-4A8A-BA2C-A69D67114813}</Project>
-      <Name>MessagePackLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

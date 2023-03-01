@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Axeno.Networking.Connection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Axeno.Helper
 {
     public class ClientsLV : INotifyPropertyChanged
     {
-        public Socket Socket { get; set; }
+        public Client Client { get; set; }
         public string uid { get; set; }
         public string groupName { get; set; }
         public string clientName { get; set; }

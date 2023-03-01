@@ -3,6 +3,7 @@ using Axeno.Networking.Communication;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -188,6 +189,47 @@ namespace Axeno.Networking.Connection
             }
             catch (SocketException) { return false; }
 
+        }
+        public void Send(byte[] msg)
+        {
+            try
+            {
+                if (!Socket.Connected)
+                {
+                    Disconnected();
+                    return;
+                }
+
+                byte[] buffersize = BitConverter.GetBytes(msg.Length);
+                Socket.Poll(-1, SelectMode.SelectWrite);
+                SslClient.Write(buffersize, 0, buffersize.Length);
+
+                if (msg.Length > 1000000)
+                {
+                    using (MemoryStream memoryStream = new MemoryStream(msg))
+                    {
+                        int read = 0;
+                        memoryStream.Position = 0;
+                        byte[] chunk = new byte[50 * 1000];
+                        while ((read = memoryStream.Read(chunk, 0, chunk.Length)) > 0)
+                        {
+                            Socket.Poll(-1, SelectMode.SelectWrite);
+                            SslClient.Write(chunk, 0, read);
+                            SslClient.Flush();
+                        }
+                    }
+                }
+                else
+                {
+                    Socket.Poll(-1, SelectMode.SelectWrite);
+                    SslClient.Write(msg, 0, msg.Length);
+                    SslClient.Flush();
+                }
+            }
+            catch
+            {
+                Disconnected();
+            }
         }
 
 

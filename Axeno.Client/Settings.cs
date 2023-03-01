@@ -8,6 +8,6 @@ namespace Axeno.Client
 {
     internal class Settings
     {
-        public static string Version = "v1.0";
+        public static string Version = "v0.8.1";
     }
 }

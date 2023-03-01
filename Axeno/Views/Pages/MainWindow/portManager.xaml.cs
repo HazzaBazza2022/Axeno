@@ -46,6 +46,8 @@ namespace Axeno.Views.Pages.MainWindow
                 {
                     t.Abort();
                 }
+                listeningThreads.Clear();
+                ListenerList.Clear();
                 MainWindowSlides.lvClients.Items.Clear();
                 btnlisten.Content = "Start Listening";
                 btnlisten.IsEnabled = true;

@@ -16,6 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Axeno.Client.Helper;
 using System.Timers;
+using Axeno.Client.Networking.Functions;
 
 namespace Axeno.Client.Networking
 {
@@ -42,6 +43,7 @@ namespace Axeno.Client.Networking
         {
             try
             {
+                ClientControl.GetExistingUID();
 
                 Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
                 {

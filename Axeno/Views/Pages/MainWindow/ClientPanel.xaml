@@ -24,15 +24,15 @@
             <ListView.ContextMenu>
                 <ContextMenu Width="200">
                     <MenuItem Header="Manage Device" />
-                    <MenuItem Header="System">
+                    <!--<MenuItem Header="System">
                         <MenuItem Header="Shutdown" />
                         <MenuItem Header="Restart" />
                         <MenuItem Header="Signout" />
-                    </MenuItem>
+                    </MenuItem>-->
                     <MenuItem Header="Client">
-                        <MenuItem Header="Reconnect" />
-                        <MenuItem Header="Disconnect" />
-                        <MenuItem Header="Disconnect &amp; Uninstall" />
+                        <MenuItem Header="Reconnect" Click="MenuItem_Click_2" />
+                        <MenuItem Header="Disconnect" Name="disconnect" Click="disconnect_Click" />
+                        <MenuItem Header="Disconnect &amp; Uninstall" Name="uninstall" Click="uninstall_Click"/>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="Port Manager" Click="MenuItem_Click"/>

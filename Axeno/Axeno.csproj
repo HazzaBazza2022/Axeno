@@ -93,6 +93,7 @@
     <Compile Include="Networking\Communication\Packet.cs" />
     <Compile Include="Networking\Connection\Client.cs" />
     <Compile Include="Networking\Connection\Listener.cs" />
+    <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\Pages\MainWindow\addDevice.xaml.cs">
       <DependentUpon>addDevice.xaml</DependentUpon>
@@ -167,12 +168,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Axeno.Wpf.Toolkit\Axeno.Wpf.Toolkit.csproj">
-      <Project>{6e15a967-dc54-4a66-9e17-7d9c3c4cb2c2}</Project>
-      <Name>Axeno.Wpf.Toolkit</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Windows\" />

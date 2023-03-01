@@ -19,6 +19,7 @@ namespace Axeno.Networking.Connection
         {
             try
             {
+                ClientSocket = null;
                 IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, Convert.ToInt32(port));
                 ClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
                 {
@@ -36,16 +37,17 @@ namespace Axeno.Networking.Connection
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Environment.Exit(0);
             }
         }
         private void EndAccept(IAsyncResult ar)
         {
+            if (!Listening) return;
             try
             {
                 new Client(ClientSocket.EndAccept(ar));
             }
-            catch {
+            catch
+            {
                 ClientSocket.BeginAccept(EndAccept, null);
             }
         }
@@ -53,16 +55,14 @@ namespace Axeno.Networking.Connection
         {
             try
             {
-                Listening= false;
+                Listening = false;
                 ClientSocket.Disconnect(true);
             }
             catch
             {
-                ClientSocket.Dispose();
+                ClientSocket.Close();
                 return;
             }
-            ClientSocket.Dispose();
-
         }
     }
 }

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Axeno.Helper;
+using Axeno.Networking.Connection;
+using Axeno.Networking.Functions;
 namespace Axeno.Views.Pages.MainWindow
 {
     /// <summary>
@@ -38,6 +40,39 @@ namespace Axeno.Views.Pages.MainWindow
         private void lvclients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// This is the reconnect function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            if(lvclients.SelectedItems.Count > 0)
+            {
+                ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
+                cli.Client.Send(ClientControl.Reconnect());
+                lvclients.Items.Remove(cli);
+            }
+        }
+
+        private void disconnect_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvclients.SelectedItems.Count > 0)
+            {
+                ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
+                cli.Client.Send(ClientControl.Disconnect());
+            }
+        }
+
+        private void uninstall_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvclients.SelectedItems.Count > 0)
+            {
+                ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
+                cli.Client.Send(ClientControl.Uninstall());
+            }
         }
     }
 }
