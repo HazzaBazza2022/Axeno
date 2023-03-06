@@ -36,7 +36,8 @@ namespace Axeno.Networking.Connection
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Disconnect();
+                return;
             }
         }
         private void EndAccept(IAsyncResult ar)

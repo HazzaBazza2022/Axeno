@@ -1,5 +1,6 @@
 ﻿using Axeno.Helper;
 using Axeno.Networking.Communication;
+using Axeno.Views.Pages.ClientManager;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +22,7 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+        public SysInfo SysInfo { get; set; }   
         public Socket Socket { get; set; }
         public string Ping { get; set; }
         public SslStream SslClient { get; set; }
@@ -90,6 +92,7 @@ namespace Axeno.Networking.Connection
         public void Disconnected()
         {
             pingTimer.Stop();
+            
             try
             {
                 ThreadPool.QueueUserWorkItem(delegate
@@ -97,8 +100,13 @@ namespace Axeno.Networking.Connection
 
                     MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
                         lvClients.Items.Remove(CurrentClient);
+                        SysInfo.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                            
+                            
+                        }));
                     }));
                 });
+
                 Socket?.Dispose();
                 pingTimer?.Dispose();
                 SslClient?.Dispose();

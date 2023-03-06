@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Axeno.Helper;
 using Axeno.Networking.Connection;
 using Axeno.Networking.Functions;
+using Axeno.Views.Windows;
+
 namespace Axeno.Views.Pages.MainWindow
 {
     /// <summary>
@@ -74,5 +76,16 @@ namespace Axeno.Views.Pages.MainWindow
                 cli.Client.Send(ClientControl.Uninstall());
             }
         }
+
+        private void manageDevice_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvclients.SelectedItems.Count > 0)
+            {
+                ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
+                Windows.ClientManager mngr = new Windows.ClientManager(cli.Client);
+                mngr.ShowDialog();
+            }
+        }
+
     }
 }

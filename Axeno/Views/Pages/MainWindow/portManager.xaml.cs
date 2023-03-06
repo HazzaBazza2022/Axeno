@@ -15,8 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Axeno.Helper;
-
+using static Axeno.Helper.MainWindowSlides;
+using Axeno.Networking.Functions;
 namespace Axeno.Views.Pages.MainWindow
 {
     /// <summary>
@@ -38,6 +38,11 @@ namespace Axeno.Views.Pages.MainWindow
             if(btnlisten.Content.ToString() == "Stop Listening")
             {
                 btnlisten.IsEnabled = false;
+
+                foreach (ClientsLV cli in lvClients.Items)
+                {
+                    cli.Client.Send(ClientControl.Reconnect());
+                }
                 foreach (Listener L in ListenerList)
                 {
                     L.Disconnect();

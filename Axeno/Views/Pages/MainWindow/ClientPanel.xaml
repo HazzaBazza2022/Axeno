@@ -23,7 +23,7 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu Width="200">
-                    <MenuItem Header="Manage Device" />
+                    <MenuItem Header="Manage Device" Name="manageDevice" Click="manageDevice_Click" />
                     <!--<MenuItem Header="System">
                         <MenuItem Header="Shutdown" />
                         <MenuItem Header="Restart" />

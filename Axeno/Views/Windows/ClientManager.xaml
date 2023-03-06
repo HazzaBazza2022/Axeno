@@ -1,0 +1,61 @@
+﻿<Window x:Class="Axeno.Views.Windows.ClientManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+                xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
+        xmlns:local="clr-namespace:Axeno.Views.Windows"
+        mc:Ignorable="d"
+        Title="ClientManager" Height="520" Width="900">
+    <Window.Resources>
+        <Storyboard x:Key="ExitAnimation">
+            <DoubleAnimation Storyboard.Target="{Binding ElementName='window'}"
+                             Storyboard.TargetProperty="(Window.Opacity)"
+                             Duration="0:0:1" From="1" To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
+    </i:Interaction.Behaviors>
+    <Border CornerRadius="25" BorderBrush="DarkGray" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
+        <Grid>
+            <Border  CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,473" Height="41" />
+            <TextBlock Text="Axeno" FontWeight="Bold" FontSize="20" Margin="423,0,423,514"/>
+            <Ellipse Fill="Red" Margin="869,9,4,485" MouseDown="closebtn_MouseDown" Name="closebtn"/>
+            <Ellipse Fill="Orange" Margin="850,9,23,485" MouseDown="minimizebtn_MouseDown" Name="minimizebtn"/>
+            <TextBlock Text="Device Manager" FontWeight="Bold" FontSize="20" Margin="368,0,367,476"/>
+            <Menu Margin="4,40,4,434">
+                <MenuItem Header="General" >
+                    <MenuItem Header="System Information" />
+                </MenuItem>
+                <MenuItem Header="System" >
+                    <MenuItem Header="File Explorer" />
+                    <MenuItem Header="Registry Editor" />
+                    <MenuItem Header="Process Manager" />
+                    <MenuItem Header="Command Line" />
+
+                </MenuItem>
+                <MenuItem Header="Surveillance" >
+                    <MenuItem Header="Desktop" />
+                    <MenuItem Header="Webcam" />
+                    <MenuItem Header="Microphone" />
+                    <MenuItem Header="Keylogger" />
+
+                </MenuItem>
+                <MenuItem Header="Networking">
+                    <MenuItem Header="Download &amp; Execute"/>
+                    <MenuItem Header="Connections" />
+                </MenuItem>
+
+            </Menu>
+            <Frame Name="frmdevmgr" NavigationUIVisibility="Hidden" Margin="0,73,0,4" />
+        </Grid>
+    </Border>
+</Window>

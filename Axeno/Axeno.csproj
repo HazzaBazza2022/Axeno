@@ -77,9 +77,11 @@
     </ApplicationDefinition>
     <Compile Include="Algorithm\Zip.cs" />
     <Compile Include="Helper\CertificateManager.cs" />
+    <Compile Include="Helper\ClientManagerSlides.cs" />
     <Compile Include="Helper\ClientsListView.cs" />
     <Compile Include="Helper\MainWindowSlides.cs" />
     <Compile Include="Helper\PortManagerListView.cs" />
+    <Compile Include="Helper\SysInfoLV.cs" />
     <Compile Include="Licensing\KeyAuth.cs" />
     <Compile Include="Licensing\LicensingWindow.xaml.cs">
       <DependentUpon>LicensingWindow.xaml</DependentUpon>
@@ -90,11 +92,16 @@
     <Compile Include="MessagePack\ReadTools.cs" />
     <Compile Include="MessagePack\WriteTools.cs" />
     <Compile Include="Networking\Communication\HandleListView.cs" />
+    <Compile Include="Networking\Communication\HandleSysInfo.cs" />
     <Compile Include="Networking\Communication\Packet.cs" />
     <Compile Include="Networking\Connection\Client.cs" />
     <Compile Include="Networking\Connection\Listener.cs" />
     <Compile Include="Networking\Functions\ClientControl.cs" />
+    <Compile Include="Networking\Functions\General\SystemInformation.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Views\Pages\ClientManager\SysInfo.xaml.cs">
+      <DependentUpon>SysInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainWindow\addDevice.xaml.cs">
       <DependentUpon>addDevice.xaml</DependentUpon>
     </Compile>
@@ -106,6 +113,9 @@
     </Compile>
     <Compile Include="Views\Pages\MainWindow\portManager.xaml.cs">
       <DependentUpon>portManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ClientManager.xaml.cs">
+      <DependentUpon>ClientManager.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\ClientManager\SysInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\MainWindow\addDevice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\MainWindow\portManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ClientManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,8 +187,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -39,6 +39,18 @@ namespace Axeno.Networking.Communication
                             });
                             break;
                         }
+                    case "SystemInformation":
+                        {
+                            MessageBox.Show("here");
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.SysInfo.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new HandleSysInfo().InsertInformation(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
                 }
             }
             catch
