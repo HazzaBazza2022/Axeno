@@ -41,7 +41,6 @@ namespace Axeno.Networking.Communication
                         }
                     case "SystemInformation":
                         {
-                            MessageBox.Show("here");
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 

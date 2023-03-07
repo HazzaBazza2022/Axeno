@@ -1,5 +1,6 @@
 ﻿using Axeno.Helper;
 using Axeno.Networking.Connection;
+using Axeno.Networking.Functions;
 using Axeno.Views.Pages.ClientManager;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Axeno.Views.Windows
         {
             InitializeComponent();
             Client = cli;
+            cli.Manager = this;
             Loaded += ClientManager_Loaded;
         }
 
@@ -56,6 +58,46 @@ namespace Axeno.Views.Windows
         private void minimizebtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void sysinfoclick_Click(object sender, RoutedEventArgs e)
+        {
+            frmdevmgr.Navigate(new SysInfo(Client));
+
+        }
+
+        private void reconclient_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(ClientControl.Reconnect());
+        }
+
+        private void disconclient_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(ClientControl.Disconnect());
+
+        }
+
+        private void uninclient_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(ClientControl.Uninstall());
+
+        }
+
+        private void signout_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(PowerControl.Signout());
+        }
+
+        private void shutdown_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(PowerControl.Shutdown());
+
+        }
+
+        private void restart_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(PowerControl.Restart());
+
         }
     }
 }

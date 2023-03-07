@@ -32,6 +32,12 @@ namespace Axeno.Client.Networking.Functions
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
             });
+            RegistryKey keyopen = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true);
+            if (keyopen != null)
+            {
+                keyopen.DeleteSubKeyTree("AxenoSettings", false);
+                keyopen.Close();
+            }
             Environment.Exit(0);
         }
         public static void SaveUID(string uid)

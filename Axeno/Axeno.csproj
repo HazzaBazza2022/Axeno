@@ -98,6 +98,7 @@
     <Compile Include="Networking\Connection\Listener.cs" />
     <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Functions\General\SystemInformation.cs" />
+    <Compile Include="Networking\Functions\PowerControl.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\Pages\ClientManager\SysInfo.xaml.cs">
       <DependentUpon>SysInfo.xaml</DependentUpon>

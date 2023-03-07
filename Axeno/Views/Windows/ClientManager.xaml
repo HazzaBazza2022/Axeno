@@ -33,7 +33,7 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
             <TextBlock Text="Device Manager" FontWeight="Bold" FontSize="20" Margin="368,0,367,476"/>
             <Menu Margin="4,40,4,434">
                 <MenuItem Header="General" >
-                    <MenuItem Header="System Information" />
+                    <MenuItem Header="System Information" Name="sysinfoclick" Click="sysinfoclick_Click"/>
                 </MenuItem>
                 <MenuItem Header="System" >
                     <MenuItem Header="File Explorer" />
@@ -51,7 +51,17 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
                 </MenuItem>
                 <MenuItem Header="Networking">
                     <MenuItem Header="Download &amp; Execute"/>
-                    <MenuItem Header="Connections" />
+                    <MenuItem Header="Network Connections" />
+                </MenuItem>
+                <MenuItem Header="Power">
+                    <MenuItem Header="Signout" Name="signout" Click="signout_Click"/>
+                    <MenuItem Header="Shutdown" Name="shutdown" Click="shutdown_Click"/>
+                    <MenuItem Header="Restart" Name="restart" Click="restart_Click"/>
+                </MenuItem>
+                <MenuItem Header="Client">
+                    <MenuItem Header="Reconnect" Name="reconclient" Click="reconclient_Click"/>
+                    <MenuItem Header="Disconnect" Name="disconclient" Click="disconclient_Click" />
+                    <MenuItem Header="Disconnect &amp; Uninstall" Name="uninclient" Click="uninclient_Click" />
                 </MenuItem>
 
             </Menu>
