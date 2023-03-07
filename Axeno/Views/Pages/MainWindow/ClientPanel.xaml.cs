@@ -82,8 +82,11 @@ namespace Axeno.Views.Pages.MainWindow
             if (lvclients.SelectedItems.Count > 0)
             {
                 ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
-                Windows.ClientManager mngr = new Windows.ClientManager(cli.Client);
-                mngr.ShowDialog();
+                if (cli.Client.Manager == null)
+                {
+                    Windows.ClientManager mngr = new Windows.ClientManager(cli.Client);
+                    mngr.Show();
+                }
             }
         }
 

@@ -30,6 +30,12 @@ namespace Axeno.Views.Windows
             Client = cli;
             cli.Manager = this;
             Loaded += ClientManager_Loaded;
+            Closed += ClientManager_Closed;
+        }
+
+        private void ClientManager_Closed(object sender, EventArgs e)
+        {
+            Client.Manager = null;
         }
 
         private void ClientManager_Loaded(object sender, RoutedEventArgs e)
