@@ -1,0 +1,18 @@
+﻿<Page x:Class="Axeno.Views.Pages.ClientManager.RemoteDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      Background="White"
+      xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
+      mc:Ignorable="d" 
+      d:DesignHeight="429" d:DesignWidth="886"
+      Title="RemoteDesktop">
+    <Grid>
+        <Image Name="imgdesktop" Margin="0,48,0,0" />
+        <Button Style="{StaticResource roundbtn}" Content="Start" Margin="5,5,731,390" FontSize="15" Click="Button_Click" />
+        <ComboBox Name="cmbScreens" Margin="163,5,474,389" Text="Select a screen" IsReadOnly="True" HorizontalContentAlignment="Left" IsEditable="True"/>
+        <TextBlock Text="Quality" FontSize="16" Margin="429,12,402,395" FontWeight="Bold"/>
+        <Slider Name="sldrquality" Maximum="100" Minimum="1" SmallChange="2" Margin="495,5,10,389" LargeChange="10" Value="60" />
+    </Grid>
+</Page>

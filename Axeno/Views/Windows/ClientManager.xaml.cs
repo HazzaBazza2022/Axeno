@@ -24,6 +24,7 @@ namespace Axeno.Views.Windows
     public partial class ClientManager : Window
     {
         public static Client Client { get; set; }   
+
         public ClientManager(Client cli)
         {
             InitializeComponent();
@@ -103,6 +104,12 @@ namespace Axeno.Views.Windows
         private void restart_Click(object sender, RoutedEventArgs e)
         {
             Client.Send(PowerControl.Restart());
+
+        }
+
+        private void desktopclick_Click(object sender, RoutedEventArgs e)
+        {
+            frmdevmgr.Navigate(new RemoteDesktop(Client));
 
         }
     }

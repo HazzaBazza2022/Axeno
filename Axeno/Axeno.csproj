@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +55,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -99,7 +101,18 @@
     <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Functions\General\SystemInformation.cs" />
     <Compile Include="Networking\Functions\PowerControl.cs" />
+    <Compile Include="Networking\Functions\Surveillience\RemoteDesktop.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="StreamLibrary\Enums.cs" />
+    <Compile Include="StreamLibrary\IUnsafeCodec.cs" />
+    <Compile Include="StreamLibrary\IVideoCodec.cs" />
+    <Compile Include="StreamLibrary\src\JpgCompression.cs" />
+    <Compile Include="StreamLibrary\src\LzwCompression.cs" />
+    <Compile Include="StreamLibrary\src\NativeMethods.cs" />
+    <Compile Include="StreamLibrary\UnsafeCodecs\UnsafeStreamCodec.cs" />
+    <Compile Include="Views\Pages\ClientManager\RemoteDesktop.xaml.cs">
+      <DependentUpon>RemoteDesktop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ClientManager\SysInfo.xaml.cs">
       <DependentUpon>SysInfo.xaml</DependentUpon>
     </Compile>
@@ -132,6 +145,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Licensing\LicensingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientManager\RemoteDesktop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

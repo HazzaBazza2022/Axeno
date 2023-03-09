@@ -23,6 +23,7 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+        public RemoteDesktop Rdp { get; set; }
         public SysInfo SysInfo { get; set; }   
         public ClientManager Manager { get; set; }
         public Socket Socket { get; set; }

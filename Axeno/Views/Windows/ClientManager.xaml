@@ -43,7 +43,7 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
 
                 </MenuItem>
                 <MenuItem Header="Surveillance" >
-                    <MenuItem Header="Desktop" />
+                    <MenuItem Header="Desktop" Name="desktopclick" Click="desktopclick_Click"/>
                     <MenuItem Header="Webcam" />
                     <MenuItem Header="Microphone" />
                     <MenuItem Header="Keylogger" />
