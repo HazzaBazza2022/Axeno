@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Algorithm\Zip.cs" />
+    <Compile Include="HandleSendFile.cs" />
     <Compile Include="Helper\CertificateManager.cs" />
     <Compile Include="Helper\ClientManagerSlides.cs" />
     <Compile Include="Helper\ClientsListView.cs" />
@@ -103,13 +104,12 @@
     <Compile Include="Networking\Functions\PowerControl.cs" />
     <Compile Include="Networking\Functions\Surveillience\RemoteDesktop.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="StreamLibrary\Enums.cs" />
-    <Compile Include="StreamLibrary\IUnsafeCodec.cs" />
-    <Compile Include="StreamLibrary\IVideoCodec.cs" />
-    <Compile Include="StreamLibrary\src\JpgCompression.cs" />
-    <Compile Include="StreamLibrary\src\LzwCompression.cs" />
-    <Compile Include="StreamLibrary\src\NativeMethods.cs" />
-    <Compile Include="StreamLibrary\UnsafeCodecs\UnsafeStreamCodec.cs" />
+    <Compile Include="Views\Pages\ClientManager\Dl_Execute.xaml.cs">
+      <DependentUpon>Dl_Execute.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ClientManager\network_connections.xaml.cs">
+      <DependentUpon>network_connections.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ClientManager\RemoteDesktop.xaml.cs">
       <DependentUpon>RemoteDesktop.xaml</DependentUpon>
     </Compile>
@@ -145,6 +145,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Licensing\LicensingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientManager\Dl_Execute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientManager\network_connections.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,6 +213,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Networking\Functions\Networking\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

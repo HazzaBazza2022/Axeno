@@ -63,6 +63,28 @@ namespace Axeno.Networking.Communication
                             });
                             break;
                         }
+                    case "DesktopStream":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new RemoteDesktopFunction().HandleStream(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
+                    case "FileSender":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.sendFile.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new HandleSendFile().HandleResult(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
                 }
             }
             catch

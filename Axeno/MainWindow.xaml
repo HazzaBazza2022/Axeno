@@ -1,15 +1,14 @@
 ﻿<Window x:Class="Axeno.MainWindow"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         WindowStartupLocation="CenterScreen"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-                 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 Background="Transparent"
+        Background="Transparent"
         xmlns:local="clr-namespace:Axeno" xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
         mc:Ignorable="d"
         AllowsTransparency="True"
@@ -25,15 +24,29 @@
     <i:Interaction.Behaviors>
         <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
     </i:Interaction.Behaviors>
-    <Border CornerRadius="25"  Padding="6" Background="White" MouseDown="Border_MouseDown">
-        <Grid  MouseDown="Grid_MouseDown">
-            <Grid>
-                <Border  CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,503" />
-                <Ellipse Fill="Red" Margin="889,6,4,518" MouseDown="Ellipse_MouseDown"/>
-                <TextBlock Text="Axeno" FontWeight="Bold" FontSize="20" Margin="423,0,423,514"/>
-                <Ellipse Fill="Orange" Margin="870,6,23,518" MouseDown="Ellipse_MouseDown_2"/>
-                <Frame Name="frmMain" Margin="0,40,0,10" NavigationUIVisibility="Hidden" />
+    <Border CornerRadius="25" Padding="6" Background="White"  MouseDown="Border_MouseDown">
+        <Grid Name="grdaxeno" MouseDown="Border_MouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,0"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="4" Text="Axeno" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Ellipse Grid.Column="1" Fill="Orange" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6,6,6,0" MouseDown="Ellipse_MouseDown_2"/>
+                <Ellipse Grid.Column="2" Fill="ForestGreen" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,6,6,0" Name="maximise" MouseDown="maximise_MouseDown"/>
+                <Ellipse Grid.Column="3" Fill="Red" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,6,6,0" MouseDown="Ellipse_MouseDown"/>
+
             </Grid>
+            <Frame Grid.Row="1" Name="frmMain" Margin="0,0,0,10" NavigationUIVisibility="Hidden" />
         </Grid>
     </Border>
 

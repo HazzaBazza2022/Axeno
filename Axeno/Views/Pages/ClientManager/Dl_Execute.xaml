@@ -1,0 +1,21 @@
+﻿<Page x:Class="Axeno.Views.Pages.ClientManager.Dl_Execute"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+
+      Background="White"
+      xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
+      mc:Ignorable="d" 
+      d:DesignHeight="429" d:DesignWidth="886"
+      Title="Download and Execute">
+    <Grid>
+        <TextBlock Text="Download and Execute" FontSize="23" FontWeight="Bold" Margin="319,116,317,283"/>
+        <TextBox BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Double click to select file" FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="tbfilepath" Margin="165,176,165,209" />
+        <Button x:Name="btnexec" Content="Execute" FontSize="15" Style="{StaticResource roundbtn}" Margin="545,238,166,151" Click="btnExec_Click"/>
+        <RadioButton Name="execdisk" Content="Execute on Disk" GroupName="exectype"  IsChecked="True" Margin="257,249,519,161" />
+        <RadioButton Name="execmem" Content="Execute in Memory" GroupName="exectype" IsChecked="false" Margin="390,249,361,161" />
+
+    </Grid>
+</Page>

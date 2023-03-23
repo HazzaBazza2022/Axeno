@@ -30,6 +30,7 @@ namespace Axeno
             Loaded += MainWindow_Loaded;
         }
 
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if (!File.Exists("Certificate/AxenoCert.p12"))
@@ -71,7 +72,13 @@ namespace Axeno
 
         private void Ellipse_MouseDown_2(object sender, MouseButtonEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void maximise_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(this.WindowState == WindowState.Maximized) { this.WindowState = WindowState.Normal; return; }
+            this.WindowState = WindowState.Maximized;
         }
     }
 }

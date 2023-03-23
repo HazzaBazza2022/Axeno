@@ -14,6 +14,7 @@ namespace Axeno.Networking.Communication
     {
         public void AddItem(Client cli, MsgPack msgpck)
         {
+            string ipadr = cli.Socket.RemoteEndPoint.ToString();
             string group = msgpck.ForcePathObject("Group").AsString;
             string permissions = msgpck.ForcePathObject("Applevel").AsString;
             string installdate = msgpck.ForcePathObject("Instdate").AsString;
@@ -28,6 +29,7 @@ namespace Axeno.Networking.Communication
             }
             ClientsLV thisclient = new ClientsLV();
             thisclient.uid = clientuid;
+            thisclient.ipadr = ipadr;
             thisclient.version = version;
             thisclient.groupName = group;
             thisclient.appLevel = permissions;

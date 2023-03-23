@@ -38,8 +38,21 @@ namespace Axeno.Views.Pages.ClientManager
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int screen = Convert.ToInt32(cmbScreens.SelectedItem.ToString().Substring(7));
-            //Socket.Send(RemoteDesktopFunction.Start(Convert.ToInt32(sldrquality.Value), screen));
+            if (cmbScreens.Items.Count == 0) return;
+            if (btnstart.Content.ToString() == "Start")
+            {
+                int screen = Convert.ToInt32(cmbScreens.SelectedItem.ToString().Substring(7));
+                Socket.Send(RemoteDesktopFunction.Start(0, screen));
+                btnstart.Content = "Stop";
+
+            }
+            else
+            {
+                Socket.Send(RemoteDesktopFunction.Stop());
+                btnstart.Content = "Start";
+
+            }
+
         }
     }
 }

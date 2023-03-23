@@ -13,6 +13,9 @@ namespace Axeno.Helper
     {
         public Client Client { get; set; }
         public string uid { get; set; }
+        public string ipadr { get; set; }
+        public string activewin { get; set; }
+
         public string groupName { get; set; }
         public string clientName { get; set; }
         public string appLevel { get; set; }

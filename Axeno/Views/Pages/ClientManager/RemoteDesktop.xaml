@@ -9,10 +9,13 @@
       d:DesignHeight="429" d:DesignWidth="886"
       Title="RemoteDesktop">
     <Grid>
-        <Image Name="imgdesktop" Margin="0,48,0,0" />
-        <Button Style="{StaticResource roundbtn}" Content="Start" Margin="5,5,731,390" FontSize="15" Click="Button_Click" />
+        <Image Stretch="Fill" Name="imgdesktop" Margin="0,48,0,0" />
+        <Button Name="btnstart" Style="{StaticResource roundbtn}" Content="Start" Margin="5,5,731,390" FontSize="15" Click="Button_Click" />
         <ComboBox Name="cmbScreens" Margin="163,5,474,389" Text="Select a screen" IsReadOnly="True" HorizontalContentAlignment="Left" IsEditable="True"/>
-        <TextBlock Text="Quality" FontSize="16" Margin="429,12,402,395" FontWeight="Bold"/>
-        <Slider Name="sldrquality" Maximum="100" Minimum="1" SmallChange="2" Margin="495,5,10,389" LargeChange="10" Value="60" />
+
     </Grid>
 </Page>
+
+
+<!--<TextBlock  Text="Quality" FontSize="16" Margin="429,12,402,395" FontWeight="Bold"/>
+<Slider Name="sldrquality" Maximum="100" Minimum="1" SmallChange="2" Margin="495,10,10,389" LargeChange="10" Value="60" />-->

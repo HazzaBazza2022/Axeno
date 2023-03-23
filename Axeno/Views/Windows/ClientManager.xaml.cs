@@ -32,6 +32,13 @@ namespace Axeno.Views.Windows
             cli.Manager = this;
             Loaded += ClientManager_Loaded;
             Closed += ClientManager_Closed;
+            SizeChanged += ClientManager_SizeChanged;
+            
+        }
+
+        private void ClientManager_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
         }
 
         private void ClientManager_Closed(object sender, EventArgs e)
@@ -109,7 +116,36 @@ namespace Axeno.Views.Windows
 
         private void desktopclick_Click(object sender, RoutedEventArgs e)
         {
-            frmdevmgr.Navigate(new RemoteDesktop(Client));
+            if (Client.Rdp == null)
+            {
+                frmdevmgr.Navigate(new RemoteDesktop(Client));
+            }
+            else
+            {
+                frmdevmgr.Navigate(Client.Rdp);
+
+            }
+
+        }
+
+        private void filexplorer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void sendFile_Click(object sender, RoutedEventArgs e)
+        {
+            frmdevmgr.Navigate(new Dl_Execute(Client));
+
+        }
+
+        private void maximisebtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+        }
+
+        private void netcon_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

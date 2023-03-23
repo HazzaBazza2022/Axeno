@@ -90,5 +90,17 @@ namespace Axeno.Views.Pages.MainWindow
             }
         }
 
+        private void lvclients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvclients.SelectedItems.Count > 0)
+            {
+                ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
+                if (cli.Client.Manager == null)
+                {
+                    Windows.ClientManager mngr = new Windows.ClientManager(cli.Client);
+                    mngr.Show();
+                }
+            }
+        }
     }
 }
