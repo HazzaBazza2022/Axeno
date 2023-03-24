@@ -148,5 +148,11 @@ namespace Axeno.Views.Windows
         {
 
         }
+
+        private void maximise_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized) { this.WindowState = WindowState.Normal; return; }
+            this.WindowState = WindowState.Maximized;
+        }
     }
 }

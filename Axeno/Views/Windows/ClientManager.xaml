@@ -5,70 +5,62 @@
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="CanResize"
-                xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
         xmlns:local="clr-namespace:Axeno.Views.Windows"
         mc:Ignorable="d"
-        Title="ClientManager" Height="520" Width="900">
-    <Window.Resources>
-        <Storyboard x:Key="ExitAnimation">
-            <DoubleAnimation Storyboard.Target="{Binding ElementName='window'}"
-                             Storyboard.TargetProperty="(Window.Opacity)"
-                             Duration="0:0:1" From="1" To="0"/>
-        </Storyboard>
-    </Window.Resources>
-
-    <i:Interaction.Behaviors>
-        <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
-    </i:Interaction.Behaviors>
-    <Border CornerRadius="25" BorderBrush="DarkGray" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
-        
-        <Grid Name="grddevmgr">
-
-
-            <Border  CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,473" Height="41" />
-            <TextBlock Text="Axeno" FontWeight="Bold" FontSize="20" Margin="423,0,423,514"/>
-            <Ellipse Fill="Red" Margin="869,9,4,485" MouseDown="closebtn_MouseDown" Name="closebtn"/>
-            <TextBlock Text="Device Manager" FontWeight="Bold" FontSize="20" Margin="368,0,367,476"/>
-            <Menu Margin="4,40,4,434">
-                <MenuItem Header="General" >
-                    <MenuItem Header="System Information" Name="sysinfoclick" Click="sysinfoclick_Click"/>
-                </MenuItem>
-                <MenuItem Header="System" >
-                    <MenuItem Header="File Explorer" Name="filexplorer" Click="filexplorer_Click"/>
-                    <MenuItem Header="Registry Editor" />
-                    <MenuItem Header="Process Manager" />
-                    <MenuItem Header="Command Line" />
-
-                </MenuItem>
-                <MenuItem Header="Surveillance" >
-                    <MenuItem Header="Desktop" Name="desktopclick" Click="desktopclick_Click"/>
-                    <MenuItem Header="Webcam" />
-                    <MenuItem Header="Microphone" />
-                    <MenuItem Header="Keylogger" />
-
-                </MenuItem>
-                <MenuItem Header="Networking">
-                    <MenuItem Header="Download &amp; Execute" Name="sendFile" Click="sendFile_Click"/>
-                    <MenuItem Header="Network Connections" Name="netcon" Click="netcon_Click"/>
-                </MenuItem>
-                <MenuItem Header="Power">
-                    <MenuItem Header="Signout" Name="signout" Click="signout_Click"/>
-                    <MenuItem Header="Shutdown" Name="shutdown" Click="shutdown_Click"/>
-                    <MenuItem Header="Restart" Name="restart" Click="restart_Click"/>
-                </MenuItem>
-                <MenuItem Header="Client">
-                    <MenuItem Header="Reconnect" Name="reconclient" Click="reconclient_Click"/>
-                    <MenuItem Header="Disconnect" Name="disconclient" Click="disconclient_Click" />
-                    <MenuItem Header="Disconnect &amp; Uninstall" Name="uninclient" Click="uninclient_Click" />
-                </MenuItem>
-
-            </Menu>
-            <Frame Name="frmdevmgr" NavigationUIVisibility="Hidden" Margin="0,73,0,4" />
-            <Ellipse Fill="DarkOrange" Margin="852,9,22,485" MouseDown="minimizebtn_MouseDown" x:Name="minimizebtn"/>
-        </Grid>
-    </Border>
+        Title="ClientManager" Height="520" Width="900" MinWidth="900" MinHeight="520">
+    <Grid>
+        <Border CornerRadius="25" BorderBrush="DarkGray" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
+            <Grid Name="grddevmgr">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="41"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="25, 25, 0, 0" Background="DarkGray" Margin="-6,-6,-6,6" Height="41" />
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-12,0,0" VerticalAlignment="Center">
+                    <TextBlock Text=" Device Manager" FontWeight="Bold" FontSize="20" />
+                </StackPanel>
+                <Menu Grid.Row="1" Margin="4,0,4,0">
+                    <MenuItem Header="General" >
+                        <MenuItem Header="System Information" Name="sysinfoclick" Click="sysinfoclick_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="System" >
+                        <MenuItem Header="File Explorer" Name="filexplorer" Click="filexplorer_Click"/>
+                        <MenuItem Header="Registry Editor" />
+                        <MenuItem Header="Process Manager" />
+                        <MenuItem Header="Command Line" />
+                    </MenuItem>
+                    <MenuItem Header="Surveillance" >
+                        <MenuItem Header="Desktop" Name="desktopclick" Click="desktopclick_Click"/>
+                        <MenuItem Header="Webcam" />
+                        <MenuItem Header="Microphone" />
+                        <MenuItem Header="Keylogger" />
+                    </MenuItem>
+                    <MenuItem Header="Networking">
+                        <MenuItem Header="Download &amp; Execute" Name="sendFile" Click="sendFile_Click"/>
+                        <MenuItem Header="Network Connections" Name="netcon" Click="netcon_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Power">
+                        <MenuItem Header="Signout" Name="signout" Click="signout_Click"/>
+                        <MenuItem Header="Shutdown" Name="shutdown" Click="shutdown_Click"/>
+                        <MenuItem Header="Restart" Name="restart" Click="restart_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Client">
+                        <MenuItem Header="Reconnect" Name="reconclient" Click="reconclient_Click"/>
+                        <MenuItem Header="Disconnect" Name="disconclient" Click="disconclient_Click" />
+                        <MenuItem Header="Disconnect &amp; Uninstall" Name="uninclient" Click="uninclient_Click" />
+                    </MenuItem>
+                </Menu>
+                <Frame Grid.Row="1" Name="frmdevmgr" NavigationUIVisibility="Hidden" Margin="0,33,0,4" />
+                <Ellipse Grid.Row="0" Fill="Orange" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,6,58,0" MouseDown="minimizebtn_MouseDown"/>
+                <Ellipse Grid.Row="0" Fill="ForestGreen" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,6,32,0" Name="maximise" MouseDown="maximise_MouseDown"/>
+                <Ellipse Grid.Row="0" Fill="Red" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,6,6,0" MouseDown="closebtn_MouseDown"/>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
+

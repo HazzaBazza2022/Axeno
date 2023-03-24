@@ -10,23 +10,24 @@
       d:DesignHeight="488" d:DesignWidth="908"
       Title="portManager">
 
-    <Grid>
-
-        <TextBlock Text="Add a Port" FontSize="40" FontWeight="Thin" Margin="302,25,302,400" TextAlignment="Center" />
-        <Button x:Name="btnlisten" Content="Start Listening" Style="{StaticResource roundbtn}" FontSize="15" Margin="465,370,253,75" Click="btnlisten_Click" />
-        <TextBox Keyboard.KeyDown="tbport_KeyDown" Name="tbport" BorderBrush="DodgerBlue" FontSize="15" mah:TextBoxHelper.Watermark="Port" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="305,123,299,323" />
-        <Button x:Name="btnreturn" Content="Return Home" Style="{StaticResource roundbtn}" FontSize="15" Margin="265,370,453,75" Click="btnreturn_Click" />
-        <ListView BorderBrush="DodgerBlue" BorderThickness="1" Name="lvports" Margin="305,177,299,143" d:ItemsSource="{d:SampleData ItemCount=5}" Width="304">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Ports" Width="300" DisplayMemberBinding="{Binding port}" />
-                </GridView>
-            </ListView.View>
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Name="lvremove" Header="Remove Port" Click="lvremove_Click"/>
-                </ContextMenu>
-            </ListView.ContextMenu>
-        </ListView>
-    </Grid>
+    <Viewbox Stretch="Uniform">
+        <Grid Width="908" Height="488">
+            <TextBlock Text="Add a Port" FontSize="40" FontWeight="Thin" Margin="302,25,302,400" TextAlignment="Center" />
+            <Button x:Name="btnlisten" Content="Start Listening" Style="{StaticResource roundbtn}" FontSize="15" Margin="465,370,253,75" Click="btnlisten_Click" />
+            <TextBox Keyboard.KeyDown="tbport_KeyDown" Name="tbport" BorderBrush="DodgerBlue" FontSize="15" mah:TextBoxHelper.Watermark="Port" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="305,123,299,323" />
+            <Button x:Name="btnreturn" Content="Return Home" Style="{StaticResource roundbtn}" FontSize="15" Margin="265,370,453,75" Click="btnreturn_Click" />
+            <ListView BorderBrush="DodgerBlue" BorderThickness="1" Name="lvports" Margin="305,177,299,143" d:ItemsSource="{d:SampleData ItemCount=5}" Width="304">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Ports" Width="300" DisplayMemberBinding="{Binding port}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="lvremove" Header="Remove Port" Click="lvremove_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </Grid>
+    </Viewbox>
 </Page>

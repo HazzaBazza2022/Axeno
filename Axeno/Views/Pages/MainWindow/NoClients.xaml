@@ -4,20 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Axeno.Views.Pages.MainWindow"
-              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="488" d:DesignWidth="908"
       Title="NoClients" Background="White">
 
-    <Grid>
-        <TextBlock Text="You're almost ready to go!" FontSize="40" FontWeight="Thin" Margin="235,80,237,345" />
-        <TextBlock Text="The next step is to create a server certificate. This step will create a file which allows for encrypted communications between this server and your clients." TextWrapping="Wrap" FontSize="20" Margin="280,160,288,186"/>
-        <Button FontSize="15" Style="{StaticResource roundbtn}" Name="btncreatecert" Content="Create Certificate" Margin="356,340,356,105" Click="Button_Click" />
-        <mah:ProgressRing Name="certprog" Visibility="Hidden" IsActive="True" HorizontalAlignment="Left" Margin="310,342,0,0" VerticalAlignment="Top" Height="38" Width="30" />
-
-    </Grid>
+    <Viewbox Stretch="Uniform">
+        <Grid Width="908" Height="488">
+            <TextBlock Text="You're almost ready to go!" FontSize="40" FontWeight="Thin" Margin="235,80,237,345" />
+            <TextBlock Text="The next step is to create a server certificate. This step will create a file which allows for encrypted communications between this server and your clients." TextWrapping="Wrap" FontSize="20" Margin="280,160,288,186"/>
+            <Button FontSize="15" Style="{StaticResource roundbtn}" Name="btncreatecert" Content="Create Certificate" Margin="356,340,356,105" Click="Button_Click" />
+            <mah:ProgressRing Name="certprog" Visibility="Hidden" IsActive="True" HorizontalAlignment="Left" Margin="310,342,0,0" VerticalAlignment="Top" Height="38" Width="30" />
+        </Grid>
+    </Viewbox>
 </Page>
-
-
-<!--<TextBlock Text="The next step is to create the Axeno Client. This step will create an executable which can be run on machines you wish to administrate. To complete this step you must have your IP Address and Open Port ready." TextWrapping="Wrap" FontSize="20" Margin="284,148,284,178"/>-->
