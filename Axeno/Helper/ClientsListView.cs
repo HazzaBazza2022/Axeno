@@ -14,8 +14,24 @@ namespace Axeno.Helper
         public Client Client { get; set; }
         public string uid { get; set; }
         public string ipadr { get; set; }
-        public string activewin { get; set; }
-
+        public string _activewin;
+        public string activewin
+        {
+            get { return _activewin; }
+            set { _activewin = value; OnPropertyChanged(); }
+        }
+        public string _cpuUsage;
+        public string cpuUsage
+        {
+            get { return _cpuUsage; }
+            set { _cpuUsage = value; OnPropertyChanged();}
+        }
+        public string _ramUsage;
+        public string ramUsage
+        {
+            get { return _ramUsage; }
+            set { _ramUsage = value; OnPropertyChanged(); }
+        }
         public string groupName { get; set; }
         public string clientName { get; set; }
         public string appLevel { get; set; }

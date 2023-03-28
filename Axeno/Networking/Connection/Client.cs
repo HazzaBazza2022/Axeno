@@ -23,6 +23,9 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+        public Proc_mgr Proc_mgr { get; set; }
+
+        public network_connections netCon { get; set; }
         public Dl_Execute sendFile { get; set; }
         public RemoteDesktop Rdp { get; set; }
         public SysInfo SysInfo { get; set; }   
@@ -74,13 +77,19 @@ namespace Axeno.Networking.Connection
 
                     MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                     {
-                        CurrentClient.ping = pingTime.ToString() + "ms";
+                        try
+                        {
+                            CurrentClient.ping = pingTime.ToString() + "ms";
+                        }catch(Exception ex)
+                        {
+                            Disconnected();
+                        }
                     }));
                 });
             }
             catch(Exception)
             {
-                return;
+                Disconnected();
             }
 
         }

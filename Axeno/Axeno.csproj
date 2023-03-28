@@ -78,12 +78,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Algorithm\Zip.cs" />
-    <Compile Include="HandleSendFile.cs" />
     <Compile Include="Helper\CertificateManager.cs" />
     <Compile Include="Helper\ClientManagerSlides.cs" />
     <Compile Include="Helper\ClientsListView.cs" />
     <Compile Include="Helper\MainWindowSlides.cs" />
+    <Compile Include="Helper\NetworkConectionsLV.cs" />
     <Compile Include="Helper\PortManagerListView.cs" />
+    <Compile Include="Helper\ProcessManagerLV.cs" />
     <Compile Include="Helper\SysInfoLV.cs" />
     <Compile Include="Licensing\KeyAuth.cs" />
     <Compile Include="Licensing\LicensingWindow.xaml.cs">
@@ -96,19 +97,26 @@
     <Compile Include="MessagePack\WriteTools.cs" />
     <Compile Include="Networking\Communication\HandleListView.cs" />
     <Compile Include="Networking\Communication\HandleSysInfo.cs" />
+    <Compile Include="Networking\Communication\HandleUpdateInfo.cs" />
     <Compile Include="Networking\Communication\Packet.cs" />
     <Compile Include="Networking\Connection\Client.cs" />
     <Compile Include="Networking\Connection\Listener.cs" />
     <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Functions\General\SystemInformation.cs" />
+    <Compile Include="Networking\Functions\Networking\HandleSendFile.cs" />
+    <Compile Include="Networking\Functions\Networking\NetworkConnections.cs" />
     <Compile Include="Networking\Functions\PowerControl.cs" />
     <Compile Include="Networking\Functions\Surveillience\RemoteDesktop.cs" />
+    <Compile Include="Networking\Functions\System\ProcessManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\Pages\ClientManager\Dl_Execute.xaml.cs">
       <DependentUpon>Dl_Execute.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ClientManager\network_connections.xaml.cs">
       <DependentUpon>network_connections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ClientManager\Proc_mgr.xaml.cs">
+      <DependentUpon>Proc_mgr.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ClientManager\RemoteDesktop.xaml.cs">
       <DependentUpon>RemoteDesktop.xaml</DependentUpon>
@@ -153,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ClientManager\network_connections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientManager\Proc_mgr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,8 +225,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Networking\Functions\Networking\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

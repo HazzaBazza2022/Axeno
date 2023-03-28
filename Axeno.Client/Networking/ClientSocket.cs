@@ -31,7 +31,7 @@ namespace Axeno.Client.Networking
         private static long Offset { get; set; }
         public static bool IsConnected { get; set; }
         public static System.Timers.Timer pingTimer = new System.Timers.Timer();
-        public static void CheckClientConnection(object source, ElapsedEventArgs e)
+        public static void CheckAndSend(object source, ElapsedEventArgs e)
         {
             if (!CheckConnection())
             {
@@ -39,6 +39,7 @@ namespace Axeno.Client.Networking
                 IsConnected = false;
                 return;
             }
+            Send(ClientControl.UpdateStats());
         }
 
         public static void Connect()
@@ -65,7 +66,7 @@ namespace Axeno.Client.Networking
                     Offset = 0;
                     Buffer = new byte[HeaderSize];
                     Send(SendInfo.GetAndSendInformation());
-                    pingTimer.Elapsed += new ElapsedEventHandler(CheckClientConnection);
+                    pingTimer.Elapsed += new ElapsedEventHandler(CheckAndSend);
                     pingTimer.Interval = 5000;
                     pingTimer.Enabled = true;
                     SslClient.BeginRead(Buffer, (int)Offset, (int)HeaderSize, ReadServerData, null);

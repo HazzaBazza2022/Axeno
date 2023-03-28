@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Axeno.Networking.Connection;
+using Axeno.Networking.Functions.General;
+using Axeno.Networking.Functions.Networking;
+using Axeno.Networking.Functions.System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +25,22 @@ namespace Axeno.Views.Pages.ClientManager
     /// </summary>
     public partial class network_connections : Page
     {
-        public network_connections()
+
+        public static Client Client { get; set; }
+        public network_connections(Client cli)
         {
             InitializeComponent();
+            Client = cli;
+            cli.netCon = this;
+            this.lvinfo.IsEnabled = false;
+            cli.Send(NetworkConnections.Send());
+        }
+        private void refresh_list_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send(NetworkConnections.Send());
+            lvinfo.Items.Clear();
+            lvinfo.IsEnabled = false;
+            progring.Visibility = Visibility.Visible;
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿<Page x:Class="Axeno.Views.Pages.ClientManager.Proc_mgr"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
+      Background="White"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+
+      mc:Ignorable="d" 
+      d:DesignHeight="429" d:DesignWidth="1040"
+      Title="Proc_mgr">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="45"/>
+            <!-- Row for the TextBox -->
+            <RowDefinition/>
+            <!-- Row for the ListView -->
+        </Grid.RowDefinitions>
+
+        <TextBox TextChanged="tbsortlv_TextChanged" x:Name="tbsortlv" Grid.Row="0" VerticalContentAlignment="Center" mah:TextBoxHelper.Watermark="Search Processes" Margin="5,5,5,5"/>
+
+        <ListView Name="lvinfo" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Process Name" Width="150" DisplayMemberBinding="{Binding processName}"/>
+                    <GridViewColumn Header="Start Time" Width="200" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="Private Bytes" Width="100" DisplayMemberBinding="{Binding privbytes}" />
+                    <GridViewColumn Header="Working Set" Width="100" DisplayMemberBinding="{Binding workingSet}" />
+                    <GridViewColumn Header="Process ID" Width="100" DisplayMemberBinding="{Binding processID}" />
+                    <GridViewColumn Header="Company" Width="140" DisplayMemberBinding="{Binding company}" />
+                    <GridViewColumn Header="Description" Width="222" DisplayMemberBinding="{Binding description}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu Width="200">
+                    <MenuItem Header="Kill Process" Name="kill_proc" Click="kill_proc_Click"/>
+                    <MenuItem Header="Kill Process Tree" Name="kill_proc_tree" Click="kill_proc_tree_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Refresh" Name="refresh_list" Click="refresh_list_Click"/>
+
+
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.Resources>
+                <CollectionViewSource x:Key="cvsProcessInfo" Source="{Binding Source={x:Reference lvinfo}, Path=ItemsSource}"/>
+            </ListView.Resources>
+        </ListView>
+
+        <mah:ProgressRing x:Name="progring" Width="50" Height="50" IsActive="True" Grid.Row="1" />
+    </Grid>
+</Page>

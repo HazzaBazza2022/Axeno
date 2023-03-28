@@ -22,6 +22,9 @@
                     <GridViewColumn Header="Application Level" Width="130" DisplayMemberBinding="{Binding appLevel}" />
                     <GridViewColumn Header="Operating System" Width="190" DisplayMemberBinding="{Binding operatingSystem}" />
                     <GridViewColumn Header="Ping" Width="70" DisplayMemberBinding="{Binding ping}" />
+                    <GridViewColumn Header="CPU %" Width="70" DisplayMemberBinding="{Binding cpuUsage}" />
+                    <GridViewColumn Header="RAM %" Width="70" DisplayMemberBinding="{Binding ramUsage}" />
+
                     <GridViewColumn Header="Install Date" Width="135" DisplayMemberBinding="{Binding installDate}" />
                     <GridViewColumn Header="Version" Width="116" DisplayMemberBinding="{Binding version}" />
                 </GridView>

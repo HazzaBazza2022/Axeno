@@ -5,19 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
       Background="White"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+
       mc:Ignorable="d" 
-      d:DesignHeight="429" d:DesignWidth="886"
+      d:DesignHeight="429" d:DesignWidth="1040"
       Title="network_connections">
 
     <Grid>
+
         <TextBlock Text="Network Connections" FontWeight="Bold" FontSize="15" Margin="5,10,723,397"/>
-        <ListView Name="lvinfo" Margin="0,40,0,0">
+        <ListView Name="lvinfo" Margin="0,40,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Item" Width="300" DisplayMemberBinding="{Binding ItemName}"/>
-                    <GridViewColumn Header="Value" Width="586" DisplayMemberBinding="{Binding Value}" />
+                    <GridViewColumn Header="Process" Width="150" DisplayMemberBinding="{Binding process}"/>
+                    <GridViewColumn Header="Local Address" Width="230" DisplayMemberBinding="{Binding localaddr}" />
+                    <GridViewColumn Header="Local Port" Width="100" DisplayMemberBinding="{Binding localport}" />
+                    <GridViewColumn Header="Remote Address" Width="230" DisplayMemberBinding="{Binding remoteaddr}" />
+                    <GridViewColumn Header="Remote Port" Width="100" DisplayMemberBinding="{Binding remoteport}" />
+                    <GridViewColumn Header="Protocol" Width="100" DisplayMemberBinding="{Binding protocol}" />
+                    <GridViewColumn Header="State" Width="127" DisplayMemberBinding="{Binding state}" />
+
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu Width="200">
+                    <MenuItem Header="Refresh" Name="refresh_list" Click="refresh_list_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
+        <mah:ProgressRing x:Name="progring" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" />
     </Grid>
 </Page>

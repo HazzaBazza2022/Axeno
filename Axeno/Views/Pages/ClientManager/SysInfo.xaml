@@ -5,10 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       Background="White"
       xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+
       mc:Ignorable="d" 
       d:DesignHeight="429" d:DesignWidth="886"
       Title="SysInfo">
     <Grid>
+
         <TextBlock Text="System Information" FontWeight="Bold" FontSize="15" Margin="5,10,741,397"/>
         <ListView Name="lvinfo" Margin="0,40,0,0">
             <ListView.View>
@@ -17,6 +20,9 @@
                     <GridViewColumn Header="Value" Width="586" DisplayMemberBinding="{Binding Value}" />
                 </GridView>
             </ListView.View>
+
         </ListView>
+        <mah:ProgressRing Name="progring" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" />
+
     </Grid>
 </Page>

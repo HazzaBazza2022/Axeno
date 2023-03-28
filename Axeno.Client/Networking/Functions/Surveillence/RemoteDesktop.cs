@@ -55,7 +55,7 @@ namespace Axeno.Client.Networking.Functions.Surveillence
         }
         public static void StartStreaming()
         {
-            while (streaming)
+            while (streaming && ClientSocket.IsConnected)
             {
                 try
                 {

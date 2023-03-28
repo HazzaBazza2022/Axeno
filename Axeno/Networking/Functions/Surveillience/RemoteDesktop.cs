@@ -11,7 +11,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Axeno.Networking.Functions.Surveillience
@@ -62,7 +65,9 @@ namespace Axeno.Networking.Functions.Surveillience
                 image.CacheOption = BitmapCacheOption.OnLoad;
                 image.EndInit();
 
-                cli.Rdp.imgdesktop.Source = image;
+                WriteableBitmap writeableBitmap = new WriteableBitmap(image);
+
+                cli.Rdp.imgdesktop.Source = writeableBitmap;
             }
         }
     }

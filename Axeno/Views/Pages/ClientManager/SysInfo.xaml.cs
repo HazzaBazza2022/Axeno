@@ -29,7 +29,10 @@ namespace Axeno.Views.Pages.ClientManager
             InitializeComponent();
             Client = cli;
             cli.SysInfo = this;
+            this.lvinfo.IsEnabled = false;
             cli.Send(SystemInformation.GetInfo());
         }
+
+
     }
 }

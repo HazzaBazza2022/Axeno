@@ -60,9 +60,11 @@
     <Compile Include="Networking\ClientSocket.cs" />
     <Compile Include="Networking\Functions\ClientControl.cs" />
     <Compile Include="Networking\Functions\General\GetSystemInfo.cs" />
+    <Compile Include="Networking\Functions\Networking\NetworkConnections.cs" />
     <Compile Include="Networking\Functions\Networking\ReceiveFile.cs" />
     <Compile Include="Networking\Functions\PowerControl.cs" />
     <Compile Include="Networking\Functions\Surveillence\RemoteDesktop.cs" />
+    <Compile Include="Networking\Functions\System\ProcessManager.cs" />
     <Compile Include="Networking\Packet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
