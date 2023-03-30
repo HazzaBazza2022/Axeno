@@ -89,6 +89,17 @@ namespace Axeno.Client.Networking
                             ProcessManager.KillProcessTree(procname);
                             break;
                         }
+                    case "GetDrives":
+                        {
+                            ClientSocket.Send(FileManager.GetDrives());
+                            break;
+                        }
+                    case "GetDirectory":
+                        {
+                            string dir = msgpck.ForcePathObject("Directory").AsString;
+                            ClientSocket.Send(FileManager.GetDirectory(dir));
+                            break;
+                        }
                 }
             }
             catch

@@ -131,6 +131,7 @@ namespace Axeno.Views.Windows
 
         private void filexplorer_Click(object sender, RoutedEventArgs e)
         {
+            frmdevmgr.Navigate(new FileManager(Client));
 
         }
 

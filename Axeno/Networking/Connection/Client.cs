@@ -24,6 +24,7 @@ namespace Axeno.Networking.Connection
     public class Client
     {
         public Proc_mgr Proc_mgr { get; set; }
+        public FileManager fManager { get; set; }
 
         public network_connections netCon { get; set; }
         public Dl_Execute sendFile { get; set; }

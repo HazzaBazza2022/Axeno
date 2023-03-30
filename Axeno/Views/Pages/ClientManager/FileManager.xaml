@@ -1,0 +1,49 @@
+﻿<Page x:Class="Axeno.Views.Pages.ClientManager.FileManager"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
+      Background="White"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+
+      d:DesignHeight="429" d:DesignWidth="1040"
+      Title="File Manager">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="45"/>
+            <!-- Row for the TextBox -->
+            <RowDefinition/>
+            <!-- Row for the ListView -->
+        </Grid.RowDefinitions>
+
+        <TextBox TextChanged="tbsortlv_TextChanged" x:Name="tbsortlv" Grid.Row="0" VerticalContentAlignment="Center" mah:TextBoxHelper.Watermark="Search Directory" Margin="5,5,5,5"/>
+
+        <ListView Name="lvinfo" Grid.Row="1" MouseDoubleClick="lvinfo_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="400" DisplayMemberBinding="{Binding fName}"/>
+                    <GridViewColumn Header="Type" Width="140" DisplayMemberBinding="{Binding fType}" />
+                    <GridViewColumn Header="Last Access" Width="200" DisplayMemberBinding="{Binding fLast}" />
+                    <GridViewColumn Header="Size" Width="100" DisplayMemberBinding="{Binding fSize}" />
+
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu Width="200">
+                    <MenuItem Header="Back" Name="backbtn" Click="backbtn_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Execute File" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.Resources>
+
+            </ListView.Resources>
+            
+        </ListView>
+
+        <mah:ProgressRing x:Name="progring" Width="50" Height="50" IsActive="True" Grid.Row="1" />
+    </Grid>
+</Page>

@@ -129,6 +129,17 @@ namespace Axeno.Networking.Communication
                             });
                             break;
                         }
+                    case "FileManager":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+
+                                client.fManager.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                    new HandleFileManager().HandleFiles(client, msgpck);
+                                }));
+                            });
+                            break;
+                        }
                 }
             }
             catch
