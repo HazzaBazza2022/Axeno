@@ -37,6 +37,7 @@ namespace Axeno.Client.Networking
             {
                 RemoteDesktop.streaming = false;
                 IsConnected = false;
+                pingTimer.Stop();
                 return;
             }
             Send(ClientControl.UpdateStats());

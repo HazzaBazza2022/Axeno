@@ -71,17 +71,26 @@ namespace Axeno.Views.Pages.ClientManager
 
                 FileManagerlv f = lvinfo.SelectedItem as FileManagerlv;
                 
-                if(f.fType == "File")
+                if(f.fType == "Folder")
                 {
-                    return;
-                }
-                Client.Send(HandleFileManager.GetDirectory(f.fullpath, false));
-                lvinfo.Items.Clear();
+                    GetDir(f.fullpath, false);
 
-                lvinfo.IsEnabled = false;
-                progring.Visibility = Visibility.Visible;
+                }
+                else if (f.fType == "Drive")
+                {
+                    GetDir(f.fullpath, false);
+                }
+
 
             }
+        }
+        public void GetDir(string path, bool goBack)
+        {
+            Client.Send(HandleFileManager.GetDirectory(path, false));
+            lvinfo.ItemsSource = null;
+
+            lvinfo.IsEnabled = false;
+            progring.Visibility = Visibility.Visible;
         }
 
         private void backbtn_Click(object sender, RoutedEventArgs e)
@@ -90,7 +99,7 @@ namespace Axeno.Views.Pages.ClientManager
             {
                 FileManagerlv f = lvinfo.Items[0] as FileManagerlv;
                 Client.Send(HandleFileManager.GetDirectory(f.parent, true));
-                lvinfo.Items.Clear();
+                lvinfo.ItemsSource = null;
 
                 lvinfo.IsEnabled = false;
                 progring.Visibility = Visibility.Visible;

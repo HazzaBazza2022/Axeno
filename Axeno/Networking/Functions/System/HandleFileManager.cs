@@ -1,14 +1,23 @@
 ﻿using Axeno.Helper;
 using Axeno.MessagePack;
 using Axeno.Networking.Connection;
+using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.SessionState;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Axeno.Networking.Functions.Networking
 {
@@ -43,59 +52,112 @@ namespace Axeno.Networking.Functions.Networking
                 string substring = files_unpack.Substring(0, files_unpack.Length - 11);
 
                 string[] files = substring.Split(new[] { "<SPLITHERE>" }, StringSplitOptions.None);
-                Task.Run(() =>
+                Task.Run(async () =>
                 {
                     List<FileManagerlv> folderItems = new List<FileManagerlv>();
                     List<FileManagerlv> fileItems = new List<FileManagerlv>();
-
                     foreach (string file in files)
                     {
-                        FileManagerlv lvitm = new FileManagerlv();
-                        lvitm.fName = Between("Name<", ">", file);
-                        lvitm.fType = Between("Type<", ">", file);
-                        lvitm.fLast = Between("Access<", ">", file);
-                        lvitm.fSize = Between("Size<", ">", file);
-                        lvitm.fullpath = Between("Path<", ">", file);
-                        lvitm.parent = Between("Parent<", ">", file);
+                        if (file != "(EMPTYFOLDER)")
+                        {
+                            string fName = Between("Name<", ">", file);
+                            string fType = Between("Type<", ">", file);
+                            string fLast = Between("Access<", ">", file);
+                            string fSize = Between("Size<", ">", file);
+                            string fullpath = Between("Path<", ">", file);
+                            string parent = Between("Parent<", ">", file);
+                            string icon = Between("Icon<", ">", file);
+                            if (icon == "FOLDER" || icon == "DRIVE")
+                            {
+                                Bitmap iconimg = icon == "FOLDER" ? Properties.Resources.folderico : Properties.Resources.Drive;
+                                BitmapSource bmp = ConvertBitmap(iconimg);
+                                bmp.Freeze(); 
 
-                        if (lvitm.fType == "Folder")
-                        {
-                            folderItems.Add(lvitm);
-                        }
-                        else
-                        {
-                            fileItems.Add(lvitm);
+                                FileManagerlv fileInfoWithIcon = new FileManagerlv
+                                {
+                                    fName = fName,
+                                    fType = fType,
+                                    fLast = fLast,
+                                    fSize = fSize,
+                                    fullpath = fullpath,
+                                    parent = parent,
+                                    fIcon = bmp
+                                };
+
+                                if (fType == "Folder" || fType == "Drive")
+                                {
+                                    folderItems.Add(fileInfoWithIcon);
+                                }
+                                else
+                                {
+                                    fileItems.Add(fileInfoWithIcon);
+                                }
+                            }
+                            else
+                            {
+                                byte[] iconbyte = Convert.FromBase64String(icon);
+                                using (MemoryStream ms = new MemoryStream(iconbyte))
+                                {
+                                    try
+                                    {
+                                        Image iconimg = Image.FromStream(ms);
+                                        ms.Position = 0; // Reset MemoryStream position
+                                        BitmapSource iconSource = BitmapFrame.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                                        iconSource.Freeze(); // Freeze the BitmapSource
+
+                                        FileManagerlv fileInfoWithIcon = new FileManagerlv
+                                        {
+                                            fName = fName,
+                                            fType = fType,
+                                            fLast = fLast,
+                                            fSize = fSize,
+                                            fullpath = fullpath,
+                                            parent = parent,
+                                            fIcon = iconSource
+                                        };
+
+                                        if (fType == "Folder")
+                                        {
+                                            folderItems.Add(fileInfoWithIcon);
+                                        }
+                                        else
+                                        {
+                                            fileItems.Add(fileInfoWithIcon);
+                                        }
+                                    }
+                                    catch (ArgumentException e)
+                                    {
+                                        MessageBox.Show(e.Message);
+                                    }
+                                }
+                            }
                         }
                     }
 
-                    cli.fManager.Dispatcher.Invoke(() =>
+                    await cli.fManager.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                     {
-                        foreach (FileManagerlv lvitm in folderItems)
-                        {
-                            cli.fManager.lvinfo.Items.Add(lvitm);
-                        }
-
-                        foreach (FileManagerlv lvitm in fileItems)
-                        {
-                            cli.fManager.lvinfo.Items.Add(lvitm);
-                        }
-                    });
+                        cli.fManager.lvinfo.ItemsSource = folderItems.Concat(fileItems);
+                    }));
 
                 }).ContinueWith((t) =>
                 {
-                    cli.fManager.Dispatcher.Invoke(() =>
+                    cli.fManager.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                     {
                         cli.fManager.progring.Visibility = Visibility.Hidden;
                         cli.fManager.lvinfo.IsEnabled = true;
-                    });
+                    }));
+
                 });
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 MessageBox.Show("Access Denied", "File Manager", MessageBoxButton.OK, MessageBoxImage.Error);
                 cli.Send(Initiate());
             }
-
         }
+
+
+
         public static string Between(string startDelimiter, string endDelimiter, string inputString)
         {
             // define the regular expression pattern
@@ -115,5 +177,24 @@ namespace Axeno.Networking.Functions.Networking
                 return string.Empty;
             }
         }
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject([In] IntPtr hObject);
+
+        public static BitmapSource ConvertBitmap(Bitmap bitmap)
+        {
+            IntPtr hBitmap = bitmap.GetHbitmap();
+            try
+            {
+                return Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            }
+            finally
+            {
+                DeleteObject(hBitmap);
+            }
+        }
+
+
+
     }
 }

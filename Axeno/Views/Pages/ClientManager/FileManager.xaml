@@ -20,11 +20,19 @@
         </Grid.RowDefinitions>
 
         <TextBox TextChanged="tbsortlv_TextChanged" x:Name="tbsortlv" Grid.Row="0" VerticalContentAlignment="Center" mah:TextBoxHelper.Watermark="Search Directory" Margin="5,5,5,5"/>
-
         <ListView Name="lvinfo" Grid.Row="1" MouseDoubleClick="lvinfo_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="400" DisplayMemberBinding="{Binding fName}"/>
+                    <GridViewColumn Header="Name" Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding fIcon}" Width="16" Height="16" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding fName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Type" Width="140" DisplayMemberBinding="{Binding fType}" />
                     <GridViewColumn Header="Last Access" Width="200" DisplayMemberBinding="{Binding fLast}" />
                     <GridViewColumn Header="Size" Width="100" DisplayMemberBinding="{Binding fSize}" />

@@ -36,9 +36,10 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
 
-                                new HandleListView().AddItem(client, msgpck);
+                                    new HandleListView().AddItem(client, msgpck);
                                 }));
                             });
                             break;
@@ -48,7 +49,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.SysInfo.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                client.SysInfo.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new HandleSysInfo().InsertInformation(client, msgpck);
                                 }));
                             });
@@ -59,8 +61,9 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
-                                     new RemoteDesktopFunction().Handle(client, msgpck);
+                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
+                                    new RemoteDesktopFunction().Handle(client, msgpck);
                                 }));
                             });
                             break;
@@ -70,7 +73,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                client.Rdp.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new RemoteDesktopFunction().HandleStream(client, msgpck);
                                 }));
                             });
@@ -81,7 +85,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.sendFile.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                client.sendFile.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new HandleSendFile().HandleResult(client, msgpck);
                                 }));
                             });
@@ -92,7 +97,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                MainWindowSlides.ClientPanel.lvclients.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                MainWindowSlides.ClientPanel.lvclients.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new HandleUpdateInfo().Update(client, msgpck);
                                 }));
                             });
@@ -102,7 +108,8 @@ namespace Axeno.Networking.Communication
                         ThreadPool.QueueUserWorkItem(delegate
                         {
 
-                            client.netCon.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                            client.netCon.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                            {
                                 new NetworkConnections().Handle(client, msgpck);
                             }));
                         });
@@ -112,7 +119,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new ProcessManager().Handle(client, msgpck);
                                 }));
                             });
@@ -123,7 +131,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
+                                client.Proc_mgr.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
                                     new ProcessManager().HandleKilled(client, msgpck);
                                 }));
                             });
@@ -134,9 +143,8 @@ namespace Axeno.Networking.Communication
                             ThreadPool.QueueUserWorkItem(delegate
                             {
 
-                                client.fManager.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {
-                                    new HandleFileManager().HandleFiles(client, msgpck);
-                                }));
+                                new HandleFileManager().HandleFiles(client, msgpck);
+
                             });
                             break;
                         }

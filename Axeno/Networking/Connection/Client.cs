@@ -75,17 +75,17 @@ namespace Axeno.Networking.Connection
                 }
                 ThreadPool.QueueUserWorkItem(delegate
                 {
-
-                    MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                    try
                     {
-                        try
+                        MainWindowSlides.ClientPanel.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                         {
                             CurrentClient.ping = pingTime.ToString() + "ms";
-                        }catch(Exception ex)
-                        {
-                            Disconnected();
-                        }
-                    }));
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        Disconnected();
+                    }
                 });
             }
             catch(Exception)
