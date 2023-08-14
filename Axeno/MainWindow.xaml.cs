@@ -39,6 +39,8 @@ namespace Axeno
             }
             else
             {
+                Settings.ServerCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2("Certificate/AxenoCert.p12");
+
                 ClientPanel cli = new ClientPanel();
                 MainWindowSlides.ClientPanel = cli;
                 MainWindowSlides.lvClients = cli.lvclients;
