@@ -25,29 +25,31 @@ namespace Axeno
             MainWindowSlides.PortManager = new portManager();
             MainWindowSlides.NoClients = new NoClients();
             MainWindowSlides.ClientPanel = new ClientPanel();
-//#if DEBUG
-//            MainWindow mw = new MainWindow();
-//            MainWindow.Show();
-//            return;
-//#endif
-            auth.init();
-            if (File.Exists("licence.axeno"))
-            {
-                string key = File.ReadAllText("licence.axeno");
-                auth.license(key);
-                if (auth.response.success)
-                {
-                    MW.Show();
-                    return;
-                }
-                else
-                {
-                    //File.Delete("licence.axeno");
-                    MessageBox.Show("Authentication failed. If you would like to request a Hardware ID reset, please contact Axeno Support.", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            LicensingWindow licensing = new LicensingWindow();
-            licensing.Show();
+            //#if DEBUG
+            //            MainWindow mw = new MainWindow();
+            //            MainWindow.Show();
+            //            return;
+            //#endif
+            MW.Show();
+
+            //auth.init();
+            //if (File.Exists("licence.axeno"))
+            //{
+            //    string key = File.ReadAllText("licence.axeno");
+            //    auth.license(key);
+            //    if (auth.response.success)
+            //    {
+            //        MW.Show();
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        //File.Delete("licence.axeno");
+            //        MessageBox.Show("Authentication failed. If you would like to request a Hardware ID reset, please contact Axeno Support.", "Authentication Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
+            //LicensingWindow licensing = new LicensingWindow();
+            //licensing.Show();
         }
     }
 }
