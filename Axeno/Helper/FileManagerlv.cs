@@ -17,8 +17,5 @@ namespace Axeno.Helper
         public string fullpath { get; set; }
         public string parent { get; set; }
         public ImageSource fIcon { get; set; }
-
-
-
     }
 }
