@@ -112,6 +112,9 @@
     <Compile Include="Networking\Functions\System\HandleFileManager.cs" />
     <Compile Include="Networking\Functions\System\ProcessManager.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Views\Pages\ClientManager\command_prompt.xaml.cs">
+      <DependentUpon>command_prompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ClientManager\Dl_Execute.xaml.cs">
       <DependentUpon>Dl_Execute.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Licensing\LicensingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientManager\command_prompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
