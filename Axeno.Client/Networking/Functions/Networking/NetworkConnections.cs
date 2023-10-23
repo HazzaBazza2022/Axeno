@@ -16,8 +16,10 @@ namespace Axeno.Client.Networking.Functions.Networking
 {
     internal class NetworkConnections
     {
+
         public static void Handle(MsgPack msgpack)
         {
+
             ClientSocket.Send(GetNetworkConnections());
 
         }
