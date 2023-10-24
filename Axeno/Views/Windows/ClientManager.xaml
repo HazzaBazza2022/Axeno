@@ -43,7 +43,7 @@
                         <MenuItem Header="File Explorer" Name="filexplorer" Click="filexplorer_Click"/>
                         <MenuItem Header="Registry Editor" />
                         <MenuItem Header="Process Manager" Name="procmgr" Click="procmgr_Click" />
-                        <MenuItem Header="Command Line" />
+                        <MenuItem Header="Command Line" Name="cmdline" Click="cmdline_Click"/>
                     </MenuItem>
                     <MenuItem Header="Surveillance" >
                         <MenuItem Header="Desktop" Name="desktopclick" Click="desktopclick_Click"/>

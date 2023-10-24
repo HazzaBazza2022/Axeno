@@ -162,5 +162,18 @@ namespace Axeno.Views.Windows
             frmdevmgr.Navigate(new Proc_mgr(Client));
 
         }
+
+        private void cmdline_Click(object sender, RoutedEventArgs e)
+        {
+            if (Client.cmd == null)
+            {
+                frmdevmgr.Navigate(new command_prompt(Client));
+            }
+            else
+            {
+                frmdevmgr.Navigate(Client.cmd);
+
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Axeno.Networking.Connection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +22,13 @@ namespace Axeno.Views.Pages.ClientManager
     /// </summary>
     public partial class command_prompt : Page
     {
-        public command_prompt()
+        public static Client Client;
+        public command_prompt(Client cli)
         {
             InitializeComponent();
+            cli.cmd = this;
+            Client = cli;
+            
         }
     }
 }

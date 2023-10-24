@@ -10,11 +10,19 @@
       Title="command_prompt">
     <Viewbox Stretch="Uniform">
         <Grid Background="White">
-            <TextBlock Text="Download and Execute" FontSize="23" FontWeight="Bold" Margin="319,116,317,283"/>
-            <TextBox BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Double click to select file" FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="tbfilepath" Margin="165,176,165,209" />
-            <Button x:Name="btnexec" Content="Execute" FontSize="15" Style="{StaticResource roundbtn}" Margin="545,238,166,151" Click="btnExec_Click"/>
-            <RadioButton Name="execdisk" Content="Execute on Disk" GroupName="exectype"  IsChecked="True" Margin="257,249,519,161" />
-            <RadioButton Name="execmem" Content="Execute in Memory" GroupName="exectype" IsChecked="false" Margin="390,249,361,161" />
+            <TextBlock FontSize="23" FontWeight="Bold" Margin="11,9,625,390"><Run Language="en-au" Text="Remote Terminal"/></TextBlock>
+            <TextBox IsEnabled="False" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Enter Command Here" FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Name="tbcommand" Margin="9,376,9,10" />
+            <TextBox BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="The response from the remote terminal will appear here." FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="tbfilepath_Copy" Margin="9,45,9,59" />
+            <mah:ToggleSwitch  Margin="0,8,-65,0" VerticalAlignment="Top" Width="41" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" >
+                <mah:ToggleSwitch.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </mah:ToggleSwitch.RenderTransform>
+            </mah:ToggleSwitch>
         </Grid>
     </Viewbox>
 </Page>

@@ -23,6 +23,8 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+
+        public command_prompt cmd { get; set; }
         public Proc_mgr Proc_mgr { get; set; }
         public FileManager fManager { get; set; }
 
