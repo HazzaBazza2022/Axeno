@@ -1,4 +1,5 @@
 ﻿using Axeno.Networking.Connection;
+using Axeno.Networking.Functions.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,17 @@ namespace Axeno.Views.Pages.ClientManager
             cli.cmd = this;
             Client = cli;
             
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if(toggle.IsOn)
+            {
+                Client.Send(CommandPrompt.Enable());
+            }else
+            {
+                Client.Send(CommandPrompt.Disable());
+            }
         }
     }
 }

