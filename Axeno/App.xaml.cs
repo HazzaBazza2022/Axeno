@@ -25,11 +25,7 @@ namespace Axeno
             MainWindowSlides.PortManager = new portManager();
             MainWindowSlides.NoClients = new NoClients();
             MainWindowSlides.ClientPanel = new ClientPanel();
-            //#if DEBUG
-            //            MainWindow mw = new MainWindow();
-            //            MainWindow.Show();
-            //            return;
-            //#endif
+
             MW.Show();
 
             //auth.init();
