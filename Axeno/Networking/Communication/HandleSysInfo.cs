@@ -12,6 +12,7 @@ namespace Axeno.Networking.Communication
 {
     internal class HandleSysInfo
     {
+        
         public void InsertInformation(Client cli, MsgPack msgpck)
         {
             cli.SysInfo.progring.Visibility = System.Windows.Visibility.Hidden;
