@@ -6,15 +6,19 @@
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:local="clr-namespace:Axeno.Views.Pages.ClientManager"
       mc:Ignorable="d" 
-      d:DesignHeight="429" d:DesignWidth="1040"
-      Title="command_prompt">
-    <Viewbox Stretch="Uniform">
-        <Grid Background="White">
-            <TextBlock FontSize="23" FontWeight="Bold" Margin="11,9,625,390"><Run Language="en-au" Text="Remote Terminal"/></TextBlock>
-            <TextBox IsEnabled="False" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Enter Command Here" FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  Name="tbcommand" Margin="9,376,9,10" />
-            <TextBox BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="The response from the remote terminal will appear here." FontSize="15" MouseDoubleClick="tbfilepath_MouseDoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="tbfilepath_Copy" Margin="9,45,9,59" />
-            <mah:ToggleSwitch Name="toggle" Toggled="ToggleSwitch_Toggled" Margin="0,8,-65,0" VerticalAlignment="Top" Width="41" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" >
-            </mah:ToggleSwitch>
-        </Grid>
-    </Viewbox>
+      d:DesignHeight="495" d:DesignWidth="1028"
+      Height="495"
+      Width="1028"
+      Title="command_prompt"
+      Background="White">
+
+    <Grid Background="White" Width="1040">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="429"/>
+        </Grid.RowDefinitions>
+        <TextBox KeyDown="tbcommand_KeyDown" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Enter a command here" FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  x:Name="tbcommand" Margin="14,438,30,-52" />
+        <TextBox IsReadOnly="True" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="The other computers output will appear here." FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="tbcommand_Copy" Margin="14,45,30,-1" />
+        <mah:ToggleSwitch Toggled="ToggleSwitch_Toggled" Name="toggle" Margin="15,6,0,0" VerticalAlignment="Top" Height="32" Width="154" />
+    </Grid>
+
 </Page>

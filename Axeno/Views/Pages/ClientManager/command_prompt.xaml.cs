@@ -42,5 +42,18 @@ namespace Axeno.Views.Pages.ClientManager
                 Client.Send(CommandPrompt.Disable());
             }
         }
+
+        private void tbcommand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tbcommand.Text != null || tbcommand.Text !="")
+            {
+                if (e.Key == Key.Enter)
+                {
+                    Client.Send(CommandPrompt.SendCommand(tbcommand.Text));
+                    tbcommand.Text = null;
+                }
+            }
+
+        }
     }
 }

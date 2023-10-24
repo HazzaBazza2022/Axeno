@@ -97,6 +97,7 @@
     <Compile Include="MessagePack\MsgPackType.cs" />
     <Compile Include="MessagePack\ReadTools.cs" />
     <Compile Include="MessagePack\WriteTools.cs" />
+    <Compile Include="Networking\Communication\HandleCMD.cs" />
     <Compile Include="Networking\Communication\HandleListView.cs" />
     <Compile Include="Networking\Communication\HandleSysInfo.cs" />
     <Compile Include="Networking\Communication\HandleUpdateInfo.cs" />
