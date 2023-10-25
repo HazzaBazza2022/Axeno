@@ -180,6 +180,7 @@ namespace Axeno.Client.Networking.Functions.System
             MsgPack mpack = new MsgPack();
             mpack.ForcePathObject("Packet").AsString = "FileManager";
             mpack.ForcePathObject("Data").AsString = sb.ToString();
+            mpack.ForcePathObject("Directory").AsString = directoryPath;
             return mpack.Encode2Bytes();
         }
         public static byte[] ImageToByteArray(Image image)

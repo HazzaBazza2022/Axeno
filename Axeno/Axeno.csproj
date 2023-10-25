@@ -258,7 +258,7 @@
     <None Include="Resources\Drive.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="error-10379.png" />
+    <Resource Include="93634.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -60,6 +60,7 @@ namespace Axeno.Networking.Functions.Networking
             try
             {
                 string files_unpack = mpack.ForcePathObject("Data").AsString;
+                string directory = mpack.ForcePathObject("Directory").AsString; 
                 string substring = files_unpack.Substring(0, files_unpack.Length - 11);
 
                 string[] files = substring.Split(new[] { "<SPLITHERE>" }, StringSplitOptions.None);
@@ -150,12 +151,14 @@ namespace Axeno.Networking.Functions.Networking
                         cli.fManager.lvinfo.ItemsSource = folderItems.Concat(fileItems);
                     }));
 
+
                 }).ContinueWith((t) =>
                 {
                     cli.fManager.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                     {
                         cli.fManager.progring.Visibility = Visibility.Hidden;
                         cli.fManager.lvinfo.IsEnabled = true;
+                        cli.fManager.tbcurrentdir.Text = directory;
                     }));
 
                 });

@@ -8,7 +8,9 @@
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
 
-      d:DesignHeight="429" d:DesignWidth="1040"
+      d:DesignHeight="495" d:DesignWidth="1028"
+      Height="495"
+      Width="1028"
       Title="File Manager">
 
     <Grid>
@@ -19,7 +21,7 @@
             <!-- Row for the ListView -->
         </Grid.RowDefinitions>
 
-        <TextBox TextChanged="tbsortlv_TextChanged" x:Name="tbsortlv" Grid.Row="0" VerticalContentAlignment="Center" mah:TextBoxHelper.Watermark="Search Directory" Margin="5,5,5,5"/>
+        <TextBox TextChanged="tbsortlv_TextChanged" x:Name="tbsortlv" Grid.Row="0" VerticalContentAlignment="Center" mah:TextBoxHelper.Watermark="Search Directory" Margin="835,5,5,5"/>
         <ListView Name="lvinfo" Grid.Row="1" MouseDoubleClick="lvinfo_MouseDoubleClick">
             <ListView.View>
                 <GridView>
@@ -49,9 +51,22 @@
             <ListView.Resources>
 
             </ListView.Resources>
-            
+
         </ListView>
 
+
         <mah:ProgressRing x:Name="progring" Width="50" Height="50" IsActive="True" Grid.Row="1" />
+        <Image MouseDown="Image_MouseDown" Margin="0,5,993,5" Source="/93634.png" Stretch="Fill" Width="35"/>
+        <Image Name="fwd" MouseDown="fwd_MouseDown" Margin="38,5,955,5" Source="/93634.png" Stretch="Fill" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <TextBox  x:Name="tbcurrentdir" VerticalContentAlignment="Center" IsReadOnly="True" mah:TextBoxHelper.Watermark="Drives" Margin="80,5,198,5"/>
     </Grid>
 </Page>

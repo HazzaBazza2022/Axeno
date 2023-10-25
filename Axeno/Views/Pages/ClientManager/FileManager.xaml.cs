@@ -97,8 +97,8 @@ namespace Axeno.Views.Pages.ClientManager
         {
             if(lvinfo.Items.Count > 0)
             {
-                FileManagerlv f = lvinfo.Items[0] as FileManagerlv;
-                Client.QueueCommand(HandleFileManager.GetDirectory(f.parent, true));
+                string path = tbcurrentdir.Text.Substring(0, tbcurrentdir.Text.LastIndexOf("\\", StringComparison.Ordinal));
+                Client.QueueCommand(HandleFileManager.GetDirectory(path, true));
                 lvinfo.ItemsSource = null;
 
                 lvinfo.IsEnabled = false;
@@ -113,6 +113,24 @@ namespace Axeno.Views.Pages.ClientManager
             FileManagerlv f = lvinfo.SelectedItem as FileManagerlv;
 
             Client.QueueCommand(HandleFileManager.ExecuteFile(f.fullpath));
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (lvinfo.Items.Count > 0)
+            {
+                string path = tbcurrentdir.Text.Substring(0, tbcurrentdir.Text.LastIndexOf("\\", StringComparison.Ordinal));
+                Client.QueueCommand(HandleFileManager.GetDirectory(path, true));
+                lvinfo.ItemsSource = null;
+
+                lvinfo.IsEnabled = false;
+                progring.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void fwd_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

