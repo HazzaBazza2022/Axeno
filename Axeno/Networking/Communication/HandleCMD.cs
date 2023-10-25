@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Axeno.Networking.Communication
 {
@@ -12,11 +13,19 @@ namespace Axeno.Networking.Communication
     {
         public void HandleResponse(Client cli, MsgPack msgpck)
         {
-            cli.cmd.tbcommand_Copy.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
-            cli.cmd.tbcommand_Copy.VerticalContentAlignment = System.Windows.VerticalAlignment.Top;
+            try
+            {
+                cli.cmd.tbcommand_Copy.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
+                cli.cmd.tbcommand_Copy.VerticalContentAlignment = System.Windows.VerticalAlignment.Top;
 
-            string response = msgpck.ForcePathObject("Response").AsString;
-            cli.cmd.tbcommand_Copy.Text += response;
+                string response = msgpck.ForcePathObject("Response").AsString;
+                cli.cmd.tbcommand_Copy.Text += response;
+                cli.cmd.tbcommand_Copy.ScrollToEnd();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

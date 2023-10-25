@@ -41,7 +41,7 @@ namespace Axeno.Views.Pages.MainWindow
 
                 foreach (ClientsLV cli in lvClients.Items)
                 {
-                    cli.Client.Send(ClientControl.Reconnect());
+                    cli.Client.QueueCommand(ClientControl.Reconnect());
                 }
                 foreach (Listener L in ListenerList)
                 {

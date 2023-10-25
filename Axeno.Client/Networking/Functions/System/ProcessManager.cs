@@ -62,7 +62,7 @@ namespace Axeno.Client.Networking.Functions.System
             mpack.ForcePathObject("Packet").AsString = "ProcessKilled";
             mpack.ForcePathObject("ID").AsString = id.ToString();
             mpack.ForcePathObject("Result").AsString = result;
-            ClientSocket.Send(mpack.Encode2Bytes());
+            ClientSocket.QueueCommand(mpack.Encode2Bytes());
         }
         public static void KillProcessTree(string name)
         {
@@ -81,7 +81,7 @@ namespace Axeno.Client.Networking.Functions.System
 
             mpack.ForcePathObject("Packet").AsString = "ProcessKilled";
             mpack.ForcePathObject("Result").AsString = result;
-            ClientSocket.Send(mpack.Encode2Bytes());
+            ClientSocket.QueueCommand(mpack.Encode2Bytes());
         }
     }
 }

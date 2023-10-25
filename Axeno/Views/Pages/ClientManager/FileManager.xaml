@@ -43,7 +43,7 @@
                 <ContextMenu Width="200">
                     <MenuItem Header="Back" Name="backbtn" Click="backbtn_Click"/>
                     <Separator/>
-                    <MenuItem Header="Execute File" />
+                    <MenuItem Header="Execute File" Name="execfilebtn" Click="execfilebtn_Click"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.Resources>

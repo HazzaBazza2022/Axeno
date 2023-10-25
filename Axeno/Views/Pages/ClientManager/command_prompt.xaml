@@ -17,7 +17,19 @@
             <RowDefinition Height="Auto" MinHeight="429"/>
         </Grid.RowDefinitions>
         <TextBox KeyDown="tbcommand_KeyDown" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="Enter a command here" FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  x:Name="tbcommand" Margin="14,438,30,-52" />
-        <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsReadOnly="True" BorderBrush="DodgerBlue" mah:TextBoxHelper.Watermark="The other computers output will appear here." FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="tbcommand_Copy" Margin="14,45,30,-1" />
+
+        <TextBox TextWrapping="Wrap"
+                     Height="370"
+                     MaxHeight="385"
+                 VerticalScrollBarVisibility="Visible"
+             IsReadOnly="True" 
+             BorderBrush="DodgerBlue"
+             mah:TextBoxHelper.Watermark="The other computers' output will appear here."
+             FontSize="15"
+             HorizontalContentAlignment="Center"
+             VerticalContentAlignment="Center"
+             x:Name="tbcommand_Copy"
+             Margin="14,45,30,-1" />
         <mah:ToggleSwitch Toggled="ToggleSwitch_Toggled" Name="toggle" Margin="15,6,0,0" VerticalAlignment="Top" Height="32" Width="154" />
     </Grid>
 

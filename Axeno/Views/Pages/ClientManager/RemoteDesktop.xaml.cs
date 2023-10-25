@@ -28,7 +28,7 @@ namespace Axeno.Views.Pages.ClientManager
             InitializeComponent();
             cli.Rdp = this;
             Socket = cli;
-            Socket.Send(RemoteDesktopFunction.GetInfo());
+            Socket.QueueCommand(RemoteDesktopFunction.GetInfo());
         }
         /// <summary>
         /// start socket
@@ -42,13 +42,13 @@ namespace Axeno.Views.Pages.ClientManager
             if (btnstart.Content.ToString() == "Start")
             {
                 int screen = Convert.ToInt32(cmbScreens.SelectedItem.ToString().Substring(7));
-                Socket.Send(RemoteDesktopFunction.Start(0, screen));
+                Socket.QueueCommand(RemoteDesktopFunction.Start(0, screen));
                 btnstart.Content = "Stop";
 
             }
             else
             {
-                Socket.Send(RemoteDesktopFunction.Stop());
+                Socket.QueueCommand(RemoteDesktopFunction.Stop());
                 btnstart.Content = "Start";
 
             }

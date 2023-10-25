@@ -33,11 +33,11 @@ namespace Axeno.Views.Pages.ClientManager
             Client = cli;
             cli.netCon = this;
             this.lvinfo.IsEnabled = false;
-            cli.Send(NetworkConnections.Send());
+            cli.QueueCommand(NetworkConnections.Send());
         }
         private void refresh_list_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(NetworkConnections.Send());
+            Client.QueueCommand(NetworkConnections.Send());
             lvinfo.Items.Clear();
             lvinfo.IsEnabled = false;
             progring.Visibility = Visibility.Visible;

@@ -81,21 +81,21 @@ namespace Axeno.Networking.Functions.System
             MsgPack msgPack = new MsgPack();
             msgPack.ForcePathObject("Packet").AsString = "KillProcess";
             msgPack.ForcePathObject("ID").AsString = procid;
-            cli.Send(msgPack.Encode2Bytes());
+            cli.QueueCommand(msgPack.Encode2Bytes());
         }
         public static void KillProcessTree(string name, Client cli)
         {
             MsgPack msgPack = new MsgPack();
             msgPack.ForcePathObject("Packet").AsString = "KillProcessTree";
             msgPack.ForcePathObject("Name").AsString = name;
-            cli.Send(msgPack.Encode2Bytes());
+            cli.QueueCommand(msgPack.Encode2Bytes());
         }
         public void HandleKilled(Client cli, MsgPack mpack)
         {
             string result = mpack.ForcePathObject("Result").AsString;
             if (result == "Success")
             {
-                cli.Send(SendCommand());
+                cli.QueueCommand(SendCommand());
             }else
             {
                 MessageBox.Show("The process could not be killed.", "Process Manager", MessageBoxButton.OK, MessageBoxImage.Error);

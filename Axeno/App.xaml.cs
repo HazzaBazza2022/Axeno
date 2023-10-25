@@ -3,6 +3,9 @@ using System.IO;
 using System.Windows;
 using Axeno.Views.Pages.MainWindow;
 using Axeno.Helper;
+using Axeno.Views.Windows;
+using System;
+
 namespace Axeno
 {
     /// <summary>
@@ -20,6 +23,8 @@ namespace Axeno
     );
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             MainWindowSlides.BuildClientPanel = new addDevice();
             MainWindowSlides.PortManager = new portManager();
@@ -46,6 +51,13 @@ namespace Axeno
             //}
             //LicensingWindow licensing = new LicensingWindow();
             //licensing.Show();
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MW.Hide();
+
+            new ExceptionHandler().Show();
         }
     }
 }

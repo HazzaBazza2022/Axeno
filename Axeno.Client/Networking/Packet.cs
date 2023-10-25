@@ -49,7 +49,7 @@ namespace Axeno.Client.Networking
                         }
                     case "GetSysInfo":
                         {
-                            ClientSocket.Send(GetSystemInfo.Retrieve());
+                            ClientSocket.QueueCommand(GetSystemInfo.Retrieve());
                             break;
                         }
                     case "Power":
@@ -74,7 +74,7 @@ namespace Axeno.Client.Networking
                         }
                     case "RetrieveProcesses":
                         {
-                            ClientSocket.Send(ProcessManager.RetrieveProcesses());
+                            ClientSocket.QueueCommand(ProcessManager.RetrieveProcesses());
                             break;
                         }
                     case "KillProcess":
@@ -89,20 +89,14 @@ namespace Axeno.Client.Networking
                             ProcessManager.KillProcessTree(procname);
                             break;
                         }
-                    case "GetDrives":
-                        {
-                            ClientSocket.Send(FileManager.GetDrives());
-                            break;
-                        }
-                    case "GetDirectory":
-                        {
-                            string dir = msgpck.ForcePathObject("Directory").AsString;
-                            ClientSocket.Send(FileManager.GetDirectory(dir));
-                            break;
-                        }
                     case "cmd":
                         {
                             CommandPrompt.HandlePacket(msgpck);
+                            break;
+                        }
+                    case "FileManager":
+                        {
+                            FileManager.HandleCommand(msgpck);
                             break;
                         }
                 }

@@ -54,7 +54,7 @@ namespace Axeno.Views.Pages.MainWindow
             if(lvclients.SelectedItems.Count > 0)
             {
                 ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
-                cli.Client.Send(ClientControl.Reconnect());
+                cli.Client.QueueCommand(ClientControl.Reconnect());
                 lvclients.Items.Remove(cli);
             }
         }
@@ -64,7 +64,7 @@ namespace Axeno.Views.Pages.MainWindow
             if (lvclients.SelectedItems.Count > 0)
             {
                 ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
-                cli.Client.Send(ClientControl.Disconnect());
+                cli.Client.QueueCommand(ClientControl.Disconnect());
             }
         }
 
@@ -73,7 +73,7 @@ namespace Axeno.Views.Pages.MainWindow
             if (lvclients.SelectedItems.Count > 0)
             {
                 ClientsLV cli = lvclients.SelectedItems[0] as ClientsLV;
-                cli.Client.Send(ClientControl.Uninstall());
+                cli.Client.QueueCommand(ClientControl.Uninstall());
             }
         }
 

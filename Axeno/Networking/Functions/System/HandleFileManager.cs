@@ -26,7 +26,17 @@ namespace Axeno.Networking.Functions.Networking
         public static byte[] Initiate()
         {
             MsgPack mpack = new MsgPack();
-            mpack.ForcePathObject("Packet").AsString = "GetDrives";
+            mpack.ForcePathObject("Packet").AsString = "FileManager";
+            mpack.ForcePathObject("Command").AsString = "GetDrives";
+            return mpack.Encode2Bytes();
+        }
+        public static byte[] ExecuteFile(string filepath)
+        {
+            MsgPack mpack = new MsgPack();
+            mpack.ForcePathObject("Packet").AsString = "FileManager";
+            mpack.ForcePathObject("Command").AsString = "ExecuteFile";
+            mpack.ForcePathObject("Path").AsString = filepath;
+
             return mpack.Encode2Bytes();
         }
         public static byte[] GetDirectory(string dir, bool goBack)
@@ -39,7 +49,8 @@ namespace Axeno.Networking.Functions.Networking
                 }
             }
             MsgPack mpack = new MsgPack();
-            mpack.ForcePathObject("Packet").AsString = "GetDirectory";
+            mpack.ForcePathObject("Packet").AsString = "FileManager";
+            mpack.ForcePathObject("Command").AsString = "GetDirectory";
             mpack.ForcePathObject("Directory").AsString = dir;
 
             return mpack.Encode2Bytes();
@@ -152,7 +163,7 @@ namespace Axeno.Networking.Functions.Networking
             catch (Exception)
             {
                 MessageBox.Show("Access Denied", "File Manager", MessageBoxButton.OK, MessageBoxImage.Error);
-                cli.Send(Initiate());
+                cli.QueueCommand(Initiate());
             }
         }
 

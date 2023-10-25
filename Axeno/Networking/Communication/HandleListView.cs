@@ -28,7 +28,7 @@ namespace Axeno.Networking.Communication
             if(clientuid == "N/A")
             {
                 clientuid = GetUID();
-                cli.Send(SendUID(clientuid));
+                cli.QueueCommand(SendUID(clientuid));
             }
             ClientsLV thisclient = new ClientsLV();
             thisclient.uid = clientuid;

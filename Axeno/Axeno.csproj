@@ -150,6 +150,9 @@
     <Compile Include="Views\Windows\ClientManager.xaml.cs">
       <DependentUpon>ClientManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\ExceptionHandler.xaml.cs">
+      <DependentUpon>ExceptionHandler.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -215,6 +218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\ExceptionHandler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -249,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Drive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="error-10379.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

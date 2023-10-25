@@ -3,6 +3,7 @@ using Axeno.Networking.Communication;
 using Axeno.Views.Pages.ClientManager;
 using Axeno.Views.Windows;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +24,9 @@ namespace Axeno.Networking.Connection
 {
     public class Client
     {
+        private readonly ConcurrentQueue<byte[]> commandQueue = new ConcurrentQueue<byte[]>();
+        private readonly object queueLock = new object();
+        private bool isProcessingQueue = false;
 
         public command_prompt cmd { get; set; }
         public Proc_mgr Proc_mgr { get; set; }
@@ -90,8 +94,9 @@ namespace Axeno.Networking.Connection
                     }
                 });
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 Disconnected();
             }
 
@@ -226,6 +231,29 @@ namespace Axeno.Networking.Connection
             catch (SocketException) { return false; }
 
         }
+        public void QueueCommand(byte[] command)
+        {
+            commandQueue.Enqueue(command);
+            ProcessCommandQueue();
+        }
+        private void ProcessCommandQueue()
+        {
+            lock (queueLock)
+            {
+                if (isProcessingQueue || commandQueue.IsEmpty)
+                    return;
+
+                isProcessingQueue = true;
+
+                while (commandQueue.TryDequeue(out byte[] command))
+                {
+                    Send(command);
+                }
+
+                isProcessingQueue = false;
+            }
+        }
+
         public void Send(byte[] msg)
         {
             try

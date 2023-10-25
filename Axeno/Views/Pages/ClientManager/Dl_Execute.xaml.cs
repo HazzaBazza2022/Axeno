@@ -66,7 +66,7 @@ namespace Axeno.Views.Pages.ClientManager
                 msgpack.ForcePathObject("Extension").AsString = System.IO.Path.GetExtension(fpath);
                 msgpack.ForcePathObject("RunType").AsString = runtype;
 
-                Socket.Send(msgpack.Encode2Bytes());
+                Socket.QueueCommand(msgpack.Encode2Bytes());
 
             });
 

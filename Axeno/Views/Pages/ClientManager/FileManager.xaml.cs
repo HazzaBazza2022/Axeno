@@ -35,7 +35,7 @@ namespace Axeno.Views.Pages.ClientManager
             cli.fManager = this;
             Client = cli;
             lvinfo.IsEnabled = false;
-            cli.Send(HandleFileManager.Initiate());
+            cli.QueueCommand(HandleFileManager.Initiate());
             debounceTimer = new DispatcherTimer();
             debounceTimer.Interval = TimeSpan.FromMilliseconds(DebounceDelay);
             debounceTimer.Tick += DebounceTimer_Tick;
@@ -86,7 +86,7 @@ namespace Axeno.Views.Pages.ClientManager
         }
         public void GetDir(string path, bool goBack)
         {
-            Client.Send(HandleFileManager.GetDirectory(path, false));
+            Client.QueueCommand(HandleFileManager.GetDirectory(path, false));
             lvinfo.ItemsSource = null;
 
             lvinfo.IsEnabled = false;
@@ -98,13 +98,21 @@ namespace Axeno.Views.Pages.ClientManager
             if(lvinfo.Items.Count > 0)
             {
                 FileManagerlv f = lvinfo.Items[0] as FileManagerlv;
-                Client.Send(HandleFileManager.GetDirectory(f.parent, true));
+                Client.QueueCommand(HandleFileManager.GetDirectory(f.parent, true));
                 lvinfo.ItemsSource = null;
 
                 lvinfo.IsEnabled = false;
                 progring.Visibility = Visibility.Visible;
             }
 
+        }
+
+        private void execfilebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvinfo.SelectedItem == null) return;
+            FileManagerlv f = lvinfo.SelectedItem as FileManagerlv;
+
+            Client.QueueCommand(HandleFileManager.ExecuteFile(f.fullpath));
         }
     }
 }

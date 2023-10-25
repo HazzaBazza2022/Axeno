@@ -30,7 +30,7 @@ namespace Axeno.Views.Pages.ClientManager
             Client = cli;
             cli.SysInfo = this;
             this.lvinfo.IsEnabled = false;
-            cli.Send(SystemInformation.GetInfo());
+            cli.QueueCommand(SystemInformation.GetInfo());
         }
 
 

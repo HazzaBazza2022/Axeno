@@ -41,7 +41,7 @@ namespace Axeno.Views.Pages.ClientManager
             lvinfo.Items.Filter = ProcNameFilter;
             cli.Proc_mgr = this;
             this.lvinfo.IsEnabled = false;
-            cli.Send(ProcessManager.SendCommand());
+            cli.QueueCommand(ProcessManager.SendCommand());
             debounceTimer = new DispatcherTimer();
             debounceTimer.Interval = TimeSpan.FromMilliseconds(DebounceDelay);
             debounceTimer.Tick += DebounceTimer_Tick;
@@ -89,7 +89,7 @@ namespace Axeno.Views.Pages.ClientManager
 
         private void refresh_list_Click(object sender, RoutedEventArgs e)
         {
-            Socket.Send(ProcessManager.SendCommand());
+            Socket.QueueCommand(ProcessManager.SendCommand());
             lvinfo.Items.Clear();
             lvinfo.IsEnabled = false;
             progring.Visibility = Visibility.Visible;

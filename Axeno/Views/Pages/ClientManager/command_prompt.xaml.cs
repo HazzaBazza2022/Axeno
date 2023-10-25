@@ -36,10 +36,10 @@ namespace Axeno.Views.Pages.ClientManager
         {
             if(toggle.IsOn)
             {
-                Client.Send(CommandPrompt.Enable());
+                Client.QueueCommand(CommandPrompt.Enable());
             }else
             {
-                Client.Send(CommandPrompt.Disable());
+                Client.QueueCommand(CommandPrompt.Disable());
             }
         }
 
@@ -49,7 +49,7 @@ namespace Axeno.Views.Pages.ClientManager
             {
                 if (e.Key == Key.Enter)
                 {
-                    Client.Send(CommandPrompt.SendCommand(tbcommand.Text));
+                    Client.QueueCommand(CommandPrompt.SendCommand(tbcommand.Text));
                     tbcommand.Text = null;
                 }
             }

@@ -83,35 +83,35 @@ namespace Axeno.Views.Windows
 
         private void reconclient_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(ClientControl.Reconnect());
+            Client.QueueCommand(ClientControl.Reconnect());
         }
 
         private void disconclient_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(ClientControl.Disconnect());
+            Client.QueueCommand(ClientControl.Disconnect());
 
         }
 
         private void uninclient_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(ClientControl.Uninstall());
+            Client.QueueCommand(ClientControl.Uninstall());
 
         }
 
         private void signout_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(PowerControl.Signout());
+            Client.QueueCommand(PowerControl.Signout());
         }
 
         private void shutdown_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(PowerControl.Shutdown());
+            Client.QueueCommand(PowerControl.Shutdown());
 
         }
 
         private void restart_Click(object sender, RoutedEventArgs e)
         {
-            Client.Send(PowerControl.Restart());
+            Client.QueueCommand(PowerControl.Restart());
 
         }
 
