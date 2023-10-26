@@ -15,6 +15,8 @@ namespace Axeno.Client.Networking.Functions.System
 {
     internal class FileManager
     {
+
+
         public static void HandleCommand(MsgPack msgpck)
         {
             string command = msgpck.ForcePathObject("Command").AsString;

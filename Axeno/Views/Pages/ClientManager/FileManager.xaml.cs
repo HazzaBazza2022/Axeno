@@ -117,6 +117,7 @@ namespace Axeno.Views.Pages.ClientManager
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
             if (lvinfo.Items.Count > 0)
             {
                 string path = tbcurrentdir.Text.Substring(0, tbcurrentdir.Text.LastIndexOf("\\", StringComparison.Ordinal));
@@ -132,5 +133,8 @@ namespace Axeno.Views.Pages.ClientManager
         {
 
         }
+        //forward button implementation
+
+
     }
 }
